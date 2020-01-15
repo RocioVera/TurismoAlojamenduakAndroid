@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TurismoAlojamenduakAndroid</string>
+    <string name="string_user">Usuario</string>
+    <string name="string_pass">Contraseña</string>
+    <string name="string_singIn">Login</string>
+    <string name="string_singUp">Registrarse</string>
+    <string name="string_search">Buscar</string>
+    <string name="string_filter">Filtrar</string>
+    <string name="string_post">Postal</string>
+    <string name="title_activity_maps">Map</string>
+
+</resources>
