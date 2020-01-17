@@ -9,13 +9,17 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 import androidx.fragment.app.FragmentActivity;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private Double lat, log;
-//prueba
+    private ArrayList<Ostatu> ostatuLista = new  ArrayList<Ostatu>();
+
+    //prueba
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             lat = miBundle.getDouble("LATITUDE");
             log = miBundle.getDouble("LONGITUDE");
+            ostatuLista = (ArrayList<Ostatu>) miBundle.getSerializable("ostatuLista");
 
         }
 
@@ -48,17 +53,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(lat, log);
         Double[] cordenadas = new Double[2];
 
-
-
-        Double a = 40.438;
-        Double b = -3.819;
-        for(int i = 0; i != 1000; i++){
-
-                LatLng sydney2 = new LatLng(a,b);
-                mMap.addMarker(new MarkerOptions().position(sydney2).title("Ostatu"));
-
-            a++;
-            b++;
+        for(int i=0; i < ostatuLista.size(); ++i){
+            if(ostatuLista.get(i).getLATITUDE()>=lat-3 && ostatuLista.get(i).getLATITUDE()<=lat+3 && ostatuLista.get(i).getLONGITUDE()>=log-3 && ostatuLista.get(i).getLONGITUDE()<=log+3){
+                LatLng sydney2 = new LatLng(ostatuLista.get(i).getLATITUDE(),ostatuLista.get(i).getLONGITUDE());
+                mMap.addMarker(new MarkerOptions().position(sydney2).title( ostatuLista.get(i).getOSTATU_IZENA()));
+            }
         }
 
         mMap.addMarker(new MarkerOptions().position(sydney).title("You"));

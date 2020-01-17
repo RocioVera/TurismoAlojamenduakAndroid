@@ -57,9 +57,12 @@ public class Ostatuak extends AppCompatActivity {
                 //Conector konexioa = new Conector( "3262035_ostatuagrad");
                 //prueba konexioa = new prueba( "elorrieta");
                 // Connection conexion = Conector.getConnection();
-                Ostatu o = new Ostatu("123","Ostatu Pepe","El mejor Ostatu","Avd ostatu pepe","Cocacola","pepeostatu@gmail.com","653345654",50,43.2773216,-2.9763593,"Mota 1","www.pepeOstatu.com","AdiskidetsuURl","zipUrl",48878,"San Ignacio");
-                Ostatu o2 = new Ostatu("124","Ostatu Juan","El mejor Juan","Avd ostatu juan","Cocacola","Juanostatu@gmail.com","653345657",50,45.2773216,-2.9963593,"Mota 2","www.JuanOstatu.com","AdiskidetsuURl","zipUrl",48868,"San Ignacio");
-
+                Ostatu o = new Ostatu("123","Ostatu Pepe","El mejor Ostatu","Avd ostatu pepe","Cocacola","pepeostatu@gmail.com","653345654",50,43.2633534,-2.951074,"Mota 1","www.pepeOstatu.com","AdiskidetsuURl","zipUrl",48500,"San Ignacio");
+                Ostatu o2 = new Ostatu("124","Ostatu Juan","El mejor Juan","Avd ostatu juan","Cocacola","Juanostatu@gmail.com","653345657",50,0.4381311,-3.8196194,"Mota 2","www.JuanOstatu.com","AdiskidetsuURl","zipUrl",48501,"San Ignacio");
+                Ostatu o3 = new Ostatu("123","Ostatu Jose","El mejor Ostatu","Avd ostatu pepe","Cocacola","pepeostatu@gmail.com","653345654",50,43.3452853,-2.9177977,"Mota 1","www.pepeOstatu.com","AdiskidetsuURl","zipUrl",48502,"San Ignacio");
+                Ostatu o4 = new Ostatu("124","Ostatu Josefa","El mejor Juan","Avd ostatu juan","Cocacola","Juanostatu@gmail.com","653345657",50,43.2894694,-3.0108891,"Mota 2","www.JuanOstatu.com","AdiskidetsuURl","zipUrl",48503,"San Ignacio");
+                Ostatu o5 = new Ostatu("123","Ostatu Josefin","El mejor Ostatu","Avd ostatu pepe","Cocacola","pepeostatu@gmail.com","653345654",50,41.1622023,-8.656973,"Mota 1","www.pepeOstatu.com","AdiskidetsuURl","zipUrl",48504,"San Ignacio");
+                Ostatu o6 = new Ostatu("124","Ostatu Falete","El mejor Juan","Avd ostatu juan","Cocacola","Juanostatu@gmail.com","653345657",50,42.3441564,-3.7122026,"Mota 2","www.JuanOstatu.com","AdiskidetsuURl","zipUrl",48505,"San Ignacio");
                 //----
 
 
@@ -67,6 +70,10 @@ public class Ostatuak extends AppCompatActivity {
 
                 OstatuArrayLista.add(o);
                 OstatuArrayLista.add(o2);
+                OstatuArrayLista.add(o3);
+                OstatuArrayLista.add(o4);
+                OstatuArrayLista.add(o5);
+                OstatuArrayLista.add(o6);
 
                 OstatuArrayLista = cargarLista(OstatuArrayLista,filtroLista,filtrado);
 
