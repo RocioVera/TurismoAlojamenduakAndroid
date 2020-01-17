@@ -1,12 +1,6 @@
 package com.turismoalojamenduakandroid;
 
-import android.view.MotionEvent;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.stream.Stream;
-
-import androidx.annotation.NonNull;
 
 public class Ostatu implements Serializable {
    private String ID_SIGNATURA;
@@ -27,6 +21,11 @@ public class Ostatu implements Serializable {
     @Override
     public String toString() {
         return  OSTATU_IZENA;
+    }
+
+    public Ostatu(double LATITUDE, double LONGITUDE) {
+        this.LATITUDE = LATITUDE;
+        this.LONGITUDE = LONGITUDE;
     }
 
     public Ostatu(String ID_SIGNATURA, String OSTATU_IZENA, String DESKRIBAPENA, String OSTATU_HELBIDEA, String MARKA, String OSTATU_EMAIL, String OSTATU_TELEFONOA, int PERTSONA_TOT, double LATITUDE, double LONGITUDE, String MOTA, String WEB_URL, String ADISKIDETSU_URL, String ZIP_URL, int POSTA_KODEA, String HERRI_KODEA) {

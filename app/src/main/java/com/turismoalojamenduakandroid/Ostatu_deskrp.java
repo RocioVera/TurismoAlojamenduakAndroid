@@ -1,24 +1,29 @@
 package com.turismoalojamenduakandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.system.Os;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Ostatu_deskrp extends AppCompatActivity {
-    Ostatu Ostatu = new Ostatu();
-    ArrayList<Ostatu> OstatuArrayLista = new ArrayList<>();
+    com.turismoalojamenduakandroid.Ostatu Ostatu = new Ostatu();
+    ArrayList<com.turismoalojamenduakandroid.Ostatu> OstatuArrayLista = new ArrayList<>();
 
+    Button mapa, reserva;
     TextView campoNombre, campoDescrip, campoHelbidea, campoTelefonoa, campoGmail, campoMarca, campoWebURL;
+    private com.turismoalojamenduakandroid.Ostatu ost = null;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ostatu_deskrp);
+
+        mapa = findViewById(R.id.bt_mapa);
+        reserva = findViewById(R.id.bt_reserva);
 
         campoNombre = (TextView) findViewById(R.id.tv_nombre);
         campoDescrip = (TextView) findViewById(R.id.tv_descripcion);
@@ -29,9 +34,6 @@ public class Ostatu_deskrp extends AppCompatActivity {
         campoWebURL = (TextView) findViewById(R.id.tv_webUrl);
 
         Bundle miBundle=this.getIntent().getExtras();
-//        Toast.makeText(getApplicationContext(),"??: " + miBundle.toString(), Toast.LENGTH_SHORT).show();
-        com.turismoalojamenduakandroid.Ostatu ost = null;
-
 
         if (miBundle != null){
          ost = (com.turismoalojamenduakandroid.Ostatu) miBundle.getSerializable("ostatu");
@@ -45,12 +47,20 @@ public class Ostatu_deskrp extends AppCompatActivity {
             campoWebURL.setText(ost.getWEB_URL());
 
 
-
-
-
-
         }
 
+        mapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent inten = new Intent(getApplicationContext(), MapsActivity.class);
+                Bundle miBundle= new Bundle();
+
+                miBundle.putDouble("LATITUDE",ost.getLATITUDE());
+                miBundle.putDouble("LONGITUDE",ost.getLONGITUDE());
+                inten.putExtras(miBundle);
+                startActivity(inten);
+            }
+        });
 
 
     }

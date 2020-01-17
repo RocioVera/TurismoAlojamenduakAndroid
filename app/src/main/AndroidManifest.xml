@@ -7,6 +7,7 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -50,7 +51,6 @@
         </activity>
         <activity android:name=".Ostatuak"/>
         <activity android:name=".Filtrador"/>
-        <activity android:name=".Conector"/>
         <activity android:name=".Ostatu_deskrp"/>
     </application>
 

@@ -7,10 +7,11 @@
     tools:context=".MainActivity"
     android:background="#282828">
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="-52dp">
 
         <LinearLayout
@@ -20,7 +21,7 @@
 
             <TextView
                 android:id="@+id/tv_nombre"
-                android:layout_width="178dp"
+                android:layout_width="158dp"
                 android:layout_height="31dp"
                 android:layout_marginStart="116dp"
                 android:layout_marginLeft="116dp"
@@ -109,19 +110,30 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_pertsonaTot" />
 
             <Button
+                android:id="@+id/bt_mapa"
+                android:layout_width="313dp"
+                android:layout_height="66dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginLeft="36dp"
+                android:background="@drawable/butto_style3"
+                android:text="@string/string_mapa"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
                 android:id="@+id/bt_reserva"
                 android:layout_width="312dp"
                 android:layout_height="66dp"
-                android:layout_marginStart="56dp"
-                android:layout_marginLeft="56dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginLeft="36dp"
                 android:background="@drawable/butto_style"
-                android:text="@string/string_search"
+                android:text="@string/string_reserva"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bt_reserva" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
 
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
