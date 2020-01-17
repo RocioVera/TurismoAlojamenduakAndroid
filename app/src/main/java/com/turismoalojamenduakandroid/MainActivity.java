@@ -63,9 +63,19 @@ public class MainActivity extends AppCompatActivity {
 
                 ArrayList<Ostatu> ostatuLista = new  ArrayList<Ostatu>();
 
+                ostatuLista.add(o);
+                ostatuLista.add(o2);
+                ostatuLista.add(o3);
+                ostatuLista.add(o4);
+                ostatuLista.add(o5);
+                ostatuLista.add(o6);
+
+
                 miBundle.putDouble("LATITUDE",lat);
                 miBundle.putDouble("LONGITUDE",log);
                 miBundle.putSerializable("ostatuLista",ostatuLista);
+                System.out.println("Que Tal Original............................... " + ostatuLista.size());
+
                 inten.putExtras(miBundle);
                 startActivity(inten);
             }

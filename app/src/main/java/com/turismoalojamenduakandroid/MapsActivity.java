@@ -32,6 +32,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             lat = miBundle.getDouble("LATITUDE");
             log = miBundle.getDouble("LONGITUDE");
             ostatuLista = (ArrayList<Ostatu>) miBundle.getSerializable("ostatuLista");
+            System.out.println("Que Tal............................... " + ostatuLista.size());
 
         }
 
@@ -52,9 +53,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(lat, log);
         Double[] cordenadas = new Double[2];
-
+    System.out.println("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA:.... " + ostatuLista.size());
         for(int i=0; i < ostatuLista.size(); ++i){
-            if(ostatuLista.get(i).getLATITUDE()>=lat-3 && ostatuLista.get(i).getLATITUDE()<=lat+3 && ostatuLista.get(i).getLONGITUDE()>=log-3 && ostatuLista.get(i).getLONGITUDE()<=log+3){
+            System.out.println( i + ": " +ostatuLista.get(i).getLATITUDE() + ">=" + (ostatuLista.get(i).getLATITUDE()-3) +" " +ostatuLista.get(i).getLATITUDE() + " <= " +(ostatuLista.get(i).getLATITUDE()+3) + " " + ostatuLista.get(i).getLONGITUDE() + " >= " + (ostatuLista.get(i).getLONGITUDE()-3) +" "+ ostatuLista.get(i).getLONGITUDE() + " <= " + (ostatuLista.get(i).getLONGITUDE()+3));
+            if(ostatuLista.get(i).getLATITUDE()>=ostatuLista.get(i).getLATITUDE()-3 && ostatuLista.get(i).getLATITUDE()<=ostatuLista.get(i).getLATITUDE()+3 && ostatuLista.get(i).getLONGITUDE()>=ostatuLista.get(i).getLONGITUDE()-3 && ostatuLista.get(i).getLONGITUDE()<=ostatuLista.get(i).getLONGITUDE()+3){
                 LatLng sydney2 = new LatLng(ostatuLista.get(i).getLATITUDE(),ostatuLista.get(i).getLONGITUDE());
                 mMap.addMarker(new MarkerOptions().position(sydney2).title( ostatuLista.get(i).getOSTATU_IZENA()));
             }
