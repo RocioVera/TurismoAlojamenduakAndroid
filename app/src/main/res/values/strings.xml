@@ -9,4 +9,13 @@
     <string name="string_post">Postal</string>
     <string name="title_activity_maps">Map</string>
 
+    <string name="nombre">Nombre</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="apellido">Apellido</string>
+    <string name="numero">Nº.Telefono</string>
+    <string name="email">Email</string>
+    <string name="DNI">Dni</string>
+    <string name="registrar">Registrate</string>
+    <string name="volver">Volver</string>
+
 </resources>

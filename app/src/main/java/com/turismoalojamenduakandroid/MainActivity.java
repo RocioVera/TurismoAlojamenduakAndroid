@@ -29,7 +29,7 @@ import androidx.core.app.ActivityCompat;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    Button registrarse;
     Button btLogin, btRegistro, btMapa;
     EditText name;
     EditText pass;
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        registrarse = (Button) findViewById(R.id.bt_singup);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toast.makeText(MainActivity.this.getBaseContext(), "Hola", Toast.LENGTH_SHORT).show();
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         btMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent inten = new Intent(getApplicationContext(), MapsActivity.class);
+              /*  Intent inten = new Intent(getApplicationContext(), MapsActivity.class);
                 Bundle miBundle= new Bundle();
 
                 Ostatu o = new Ostatu("123","Ostatu Pepe","El mejor Ostatu","Avd ostatu pepe","Cocacola","pepeostatu@gmail.com","653345654",50,43.2633534,-2.951074,"Mota 1","www.pepeOstatu.com","AdiskidetsuURl","zipUrl",48500,"San Ignacio");
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Que Tal Original............................... " + ostatuLista.size());
 
                 inten.putExtras(miBundle);
-                startActivity(inten);
+                startActivity(inten);*/
             }
         });
 
@@ -146,6 +147,11 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void ventanaRegistro(View view){
+        Intent intent2 = new Intent (view.getContext(), registro.class);
+        startActivityForResult(intent2, 0);
     }
 }
 

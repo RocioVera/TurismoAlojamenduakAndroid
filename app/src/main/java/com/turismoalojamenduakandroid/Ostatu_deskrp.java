@@ -52,13 +52,13 @@ public class Ostatu_deskrp extends AppCompatActivity {
         mapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent inten = new Intent(getApplicationContext(), MapsActivity.class);
+               /* Intent inten = new Intent(getApplicationContext(), MapsActivity.class);
                 Bundle miBundle= new Bundle();
 
                 miBundle.putDouble("LATITUDE",ost.getLATITUDE());
                 miBundle.putDouble("LONGITUDE",ost.getLONGITUDE());
                 inten.putExtras(miBundle);
-                startActivity(inten);
+                startActivity(inten);*/
             }
         });
 
