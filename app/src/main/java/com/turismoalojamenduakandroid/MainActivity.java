@@ -19,11 +19,22 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 //Se referencian las Clases necesarias para la conexión con el Servidor MySQL
 
@@ -36,60 +47,13 @@ public class MainActivity extends AppCompatActivity {
     private Double lat, log;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         registrarse = (Button) findViewById(R.id.bt_singup);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toast.makeText(MainActivity.this.getBaseContext(), "Hola", Toast.LENGTH_SHORT).show();
-        Log.d("Diego", "Hola_____________________________________________");
-
-
-
         btMapa = (Button) findViewById(R.id.bt_mapa);
-        btLogin = (Button) findViewById(R.id.bt_singin);
-
-        btMapa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              /*  Intent inten = new Intent(getApplicationContext(), MapsActivity.class);
-                Bundle miBundle= new Bundle();
-
-                Ostatu o = new Ostatu("123","Ostatu Pepe","El mejor Ostatu","Avd ostatu pepe","Cocacola","pepeostatu@gmail.com","653345654",50,43.2633534,-2.951074,"Mota 1","www.pepeOstatu.com","AdiskidetsuURl","zipUrl",48500,"San Ignacio");
-                Ostatu o2 = new Ostatu("124","Ostatu Juan","El mejor Juan","Avd ostatu juan","Cocacola","Juanostatu@gmail.com","653345657",50,0.4381311,-3.8196194,"Mota 2","www.JuanOstatu.com","AdiskidetsuURl","zipUrl",48501,"San Ignacio");
-                Ostatu o3 = new Ostatu("123","Ostatu Jose","El mejor Ostatu","Avd ostatu pepe","Cocacola","pepeostatu@gmail.com","653345654",50,43.3452853,-2.9177977,"Mota 1","www.pepeOstatu.com","AdiskidetsuURl","zipUrl",48502,"San Ignacio");
-                Ostatu o4 = new Ostatu("124","Ostatu Josefa","El mejor Juan","Avd ostatu juan","Cocacola","Juanostatu@gmail.com","653345657",50,43.2894694,-3.0108891,"Mota 2","www.JuanOstatu.com","AdiskidetsuURl","zipUrl",48503,"San Ignacio");
-                Ostatu o5 = new Ostatu("123","Ostatu Josefin","El mejor Ostatu","Avd ostatu pepe","Cocacola","pepeostatu@gmail.com","653345654",50,41.1622023,-8.656973,"Mota 1","www.pepeOstatu.com","AdiskidetsuURl","zipUrl",48504,"San Ignacio");
-                Ostatu o6 = new Ostatu("124","Ostatu Falete","El mejor Juan","Avd ostatu juan","Cocacola","Juanostatu@gmail.com","653345657",50,42.3441564,-3.7122026,"Mota 2","www.JuanOstatu.com","AdiskidetsuURl","zipUrl",48505,"San Ignacio");
-
-                ArrayList<Ostatu> ostatuLista = new  ArrayList<Ostatu>();
-
-                ostatuLista.add(o);
-                ostatuLista.add(o2);
-                ostatuLista.add(o3);
-                ostatuLista.add(o4);
-                ostatuLista.add(o5);
-                ostatuLista.add(o6);
-
-
-                miBundle.putDouble("LATITUDE",lat);
-                miBundle.putDouble("LONGITUDE",log);
-                miBundle.putSerializable("ostatuLista",ostatuLista);
-                System.out.println("Que Tal Original............................... " + ostatuLista.size());
-
-                inten.putExtras(miBundle);
-                startActivity(inten);*/
-            }
-        });
-
-        btLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this.getBaseContext(), "Boton Login", Toast.LENGTH_SHORT).show();
-                Intent inten = new Intent(getApplicationContext(), Ostatuak.class);
-                startActivity(inten);
-            }
-        });
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -153,6 +117,80 @@ public class MainActivity extends AppCompatActivity {
         Intent intent2 = new Intent (view.getContext(), registro.class);
         startActivityForResult(intent2, 0);
     }
+
+
+    public void acceder(View v) {
+        name =  (EditText) findViewById(R.id.ET_user);
+        pass = (EditText) findViewById(R.id.ET_pass);
+       /* Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, "Fallo", duration);
+        toast.show();*/
+
+        int baimena = 1;
+        // Crear nuevo objeto Json basado en el mapa
+
+        // Actualizar datos en el servidor
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                constants.forfastnegro,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            int duration = Toast.LENGTH_SHORT;
+                            Context context = getApplicationContext();
+                            Toast toast = Toast.makeText(context, "Login completado", duration);
+                            toast.show();
+                            JSONObject obj = new JSONObject(response);
+                            String nan = obj.get("NAN").toString();
+                            String usuario = obj.get("ERABIL_IZENA").toString();
+                            String telefono = obj.get("ERABIL_TELEFONO").toString();
+                            String email = obj.get("ERABIL_EMAIL").toString();
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        int duration = Toast.LENGTH_SHORT;
+                        Context context = getApplicationContext();
+                        Toast toast = Toast.makeText(context, "Error el usuario o contraseña no existen", duration);
+                        toast.show();
+
+                        Toast.makeText(
+                                getApplicationContext(),
+                                error.getMessage(),
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                int baimena = 1;
+                Map<String, String> params = new HashMap<>();
+                params.put("NAN", name.getText().toString());
+                params.put("PASAHITZA", pass.getText().toString());
+
+                return params;
+            }
+
+        };
+        try {
+            RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+        }catch(Exception e){
+
+        }
+    }
+
+
+
 }
 
 
