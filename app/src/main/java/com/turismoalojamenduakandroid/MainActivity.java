@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         // Actualizar datos en el servidor
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
-                constants.forfastnegro,
+                constants.conexion,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

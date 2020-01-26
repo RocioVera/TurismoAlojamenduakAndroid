@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo1_bezero"
+    tools:context=".ACercaDeActivity">
+
+    <Button
+        android:id="@+id/btnCancelar2"
+        android:layout_width="98dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginLeft="128dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/butto_style3"
+        android:onClick="volverAtras"
+        android:text="@string/cancelar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="325dp"
+        android:layout_height="418dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
+        android:background="#79553D"
+        android:gravity="center"
+        android:lineSpacingExtra="8sp"
+        android:text="@string/aCercaDeTexto"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        android:textStyle="bold|italic"
+        app:fontFamily="monospace"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

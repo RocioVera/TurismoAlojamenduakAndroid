@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/cambiarContraseña"
+        android:title="@string/cambiar_contraseña" />
+    <item
+        android:id="@+id/aCercaDe"
+        android:title="@string/aCercaDe" />
+    <item
+        android:id="@+id/crearTarea"
+        android:title="@string/CrearTareaMenu" />
+</menu>

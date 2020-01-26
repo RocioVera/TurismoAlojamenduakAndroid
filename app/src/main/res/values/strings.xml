@@ -2,12 +2,17 @@
     <string name="app_name">TurismoAlojamenduakAndroid</string>
     <string name="string_user">Usuario</string>
     <string name="string_pass">Contraseña</string>
-    <string name="string_singIn">Login</string>
+    <string name="string_singIn">Iniciar sesion</string>
     <string name="string_singUp">Registrarse</string>
     <string name="string_search">Buscar</string>
     <string name="string_filter">Filtrar</string>
-    <string name="string_post">Postal</string>
+    <string name="string_pertsonaTot">Nº Personas</string>
     <string name="title_activity_maps">Map</string>
+    <string name="hasieraData">Ida</string>
+    <string name="amaieraData">Vuelta</string>
+    <string name="errorFiltrar">Tienen que estar todos los campos rellenados</string>
+    <string name="filtrar">Filtra</string>
+
 
     <string name="nombre">Nombre</string>
     <string name="contraseña">Contraseña</string>
@@ -17,5 +22,10 @@
     <string name="DNI">Dni</string>
     <string name="registrar">Registrate</string>
     <string name="volver">Volver</string>
+    <string name="menu_message">¿Que quiere hacer?</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="aCercaDeTexto">Bienvenid@ a la app de Ostatu-Agrad. Esta aplicación es para hacer tus reserbas de hoteles, campings o albergues. Gracias por usarla. Aceptamos mejoras. </string>
+    <string name="aCercaDe">A cerca de</string>
+
 
 </resources>

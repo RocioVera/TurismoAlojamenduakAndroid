@@ -2,6 +2,9 @@ package com.turismoalojamenduakandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +30,7 @@ public class Ostatuak extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ostatu);
+
         filtrado=false;
         Bundle miBundle=this.getIntent().getExtras();
 
@@ -77,8 +81,6 @@ public class Ostatuak extends AppCompatActivity {
 
                 OstatuArrayLista = cargarLista(OstatuArrayLista,filtroLista,filtrado);
 
-
-
             }
         });
 
@@ -125,4 +127,45 @@ public ArrayList<Ostatu> cargarLista(ArrayList<Ostatu> ostatuArrayLista, ArrayLi
     return pruebaArrayList;
 }
 
+    public void pantallaFiltrar (AdapterView.AdapterContextMenuInfo info) {
+       // int position = info.position;
+       // String nombre = (String) lista1.getItemAtPosition(position);
+        Intent pantallaFiltrar = new Intent(Ostatuak.this, Filtrador.class);
+        startActivity(pantallaFiltrar);
     }
+
+    public void AcercaDePantalla () {
+        Intent pantallaFiltrar = new Intent(Ostatuak.this, Filtrador.class);
+        startActivity(pantallaFiltrar);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle(getText(R.string.menu_message));
+        getMenuInflater().inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.filtrarItem:
+                pantallaFiltrar(info);
+                break;
+            case R.id.AcercaDeItem:
+                AcercaDePantalla();
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu) {
+        getMenuInflater().inflate(R.menu.context_menu,menu);
+        return true;
+    }
+
+
+
+}

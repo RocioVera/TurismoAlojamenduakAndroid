@@ -42,6 +42,7 @@
         <activity android:name=".Ostatuak" />
         <activity android:name=".Filtrador" />
         <activity android:name=".Ostatu_deskrp" />
+        <activity android:name=".ACercaDeActivity" />
     </application>
 
 </manifest>
