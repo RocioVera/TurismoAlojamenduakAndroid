@@ -7,13 +7,35 @@
     android:background="@drawable/filtrar_foto"
     tools:context=".Filtrador">
 
+    <ImageButton
+        android:id="@+id/btnAmaieraDataCalendar"
+        android:layout_width="43dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:onClick="seleccionarFechaFinal"
+        app:layout_constraintStart_toEndOf="@+id/txtAmaieraData"
+        app:layout_constraintTop_toBottomOf="@+id/spn_pertsonaTot"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+    <ImageButton
+        android:id="@+id/btnHasieraDataCalendar"
+        android:layout_width="43dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:onClick="seleccionarFechaInicio"
+        app:layout_constraintStart_toEndOf="@+id/txtHasieraData"
+        app:layout_constraintTop_toBottomOf="@+id/spn_pertsonaTot"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
     <EditText
         android:id="@+id/txtAmaieraData"
         android:layout_width="108dp"
         android:layout_height="46dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="28dp"
         android:background="@color/colorwhite"
         android:editable="false"
         android:ems="10"
@@ -22,23 +44,13 @@
         app:layout_constraintStart_toEndOf="@+id/btnHasieraDataCalendar"
         app:layout_constraintTop_toBottomOf="@+id/spn_pertsonaTot" />
 
-    <ImageButton
-        android:id="@+id/btnAmaieraDataCalendar"
-        android:layout_width="43dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:onClick="seleccionarFechaFinal"
-        app:layout_constraintStart_toEndOf="@+id/txtAmaieraData"
-        app:layout_constraintTop_toBottomOf="@+id/spn_pertsonaTot"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
-
     <EditText
         android:id="@+id/txtHasieraData"
         android:layout_width="102dp"
         android:layout_height="47dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="28dp"
         android:background="@color/colorwhite"
         android:editable="false"
         android:ems="10"
@@ -47,79 +59,67 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spn_pertsonaTot" />
 
-    <ImageButton
-        android:id="@+id/btnHasieraDataCalendar"
-        android:layout_width="43dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:onClick="seleccionarFechaInicio"
-        app:layout_constraintStart_toEndOf="@+id/txtHasieraData"
-        app:layout_constraintTop_toBottomOf="@+id/spn_pertsonaTot"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
-
     <Button
         android:id="@+id/bt_filtrar"
         android:layout_width="294dp"
         android:layout_height="61dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginRight="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/butto_style3"
         android:onClick="filtrar"
         android:text="@string/string_filter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHasieraData" />
-
-    <Spinner
-        android:id="@+id/spn_mota"
-        android:layout_width="330dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="23dp"
-        android:background="@color/colorwhite"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtVFiltrar" />
 
     <Spinner
         android:id="@+id/spn_herria"
         android:layout_width="330dp"
         android:layout_height="54dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
         android:background="@color/colorwhite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spn_probintzia" />
 
     <Spinner
-        android:id="@+id/spn_pertsonaTot"
+        android:id="@+id/spn_mota"
         android:layout_width="330dp"
         android:layout_height="54dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:background="@color/colorwhite"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spn_herria" />
+        app:layout_constraintTop_toBottomOf="@+id/txtVFiltrar" />
 
     <Spinner
         android:id="@+id/spn_probintzia"
         android:layout_width="330dp"
         android:layout_height="54dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="36dp"
         android:background="@color/colorwhite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spn_mota" />
 
+    <Spinner
+        android:id="@+id/spn_pertsonaTot"
+        android:layout_width="330dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="36dp"
+        android:background="@color/colorwhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spn_herria" />
+
     <TextView
         android:id="@+id/txtVError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="336dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"

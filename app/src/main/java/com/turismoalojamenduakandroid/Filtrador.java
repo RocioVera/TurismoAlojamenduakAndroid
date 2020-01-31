@@ -1,7 +1,9 @@
 package com.turismoalojamenduakandroid;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,14 +13,32 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Filtrador extends AppCompatActivity{
     Button filter;
@@ -35,7 +55,8 @@ public class Filtrador extends AppCompatActivity{
     private Calendar c = Calendar.getInstance();
     private String CERO = "0", BARRA = "-";
     private int mes = c.get(Calendar.MONTH), dia = c.get(Calendar.DAY_OF_MONTH), ano = c.get(Calendar.YEAR);
-
+    private String[] strMota = new String[4];
+    private String[] putamierda = new String[3];
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +69,10 @@ public class Filtrador extends AppCompatActivity{
         spnHerria=findViewById(R.id.spn_herria);
         spnPertsonaTot=findViewById(R.id.spn_pertsonaTot);
         errorMessage=findViewById(R.id.txtVError);
-
-        //para asier todoo el metodo
-
-        //mota
-        // SELECT DISTINCT(mota) FROM ostatuak
-        String[] strMota = new String[] {"Casas Rurales", "Apartarmentos", "Hotel"};
+        strMota  = (String[]) getIntent().getSerializableExtra("strMota");
+        putamierda = (String[]) getIntent().getSerializableExtra("strProvincias");
         ArrayAdapter<String>  cmbAdapMota = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, strMota);
         spnMota.setAdapter(cmbAdapMota);
-
 
         //Llenar pertsona totala
         ArrayList<String> pertsonaTot = new ArrayList<String>();
@@ -66,10 +82,11 @@ public class Filtrador extends AppCompatActivity{
         spnPertsonaTot.setAdapter(cmbAdapPertsonaTot);
 
        // Llenar provincias
-        String[] strProvincias = new String[] {"Araba", "Bizkaia", "Gipuzkoa"};
-        ArrayAdapter<String>  cmbAdapProbintziak = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, strProvincias);
-        spnProbintzia.setAdapter(cmbAdapProbintziak);
+        //String[] strProvincias = new String[] {"Araba", "Bizkaia", "Gipuzkoa"};
 
+        ArrayAdapter<String> cmbAdapProbintziak = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, putamierda);
+        spnProbintzia.setAdapter(cmbAdapProbintziak);
+        /*
         spnProbintzia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -80,51 +97,10 @@ public class Filtrador extends AppCompatActivity{
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
-        });
-
-
-    /*
-
-        ArrayAdapter ArrayMota = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item,mota);
-        ArrayMota.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnMota.setAdapter(ArrayMota);
-
-        spnMota.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                Mota = mota[position];
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-
-
-        filter = (Button) findViewById(R.id.bt_filtrar);
-
-        filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                filtroLista.add(Mota);
-                filtroLista.add(Posta.getText().toString());
-
-                if(filtroLista.get(1).isEmpty()){
-                    System.out.println("Esta vacio ");
-                    filtroLista.add(1,"0");
-                }
-
-                System.out.println("Estoy en el filtrador " + filtroLista.get(1));
-
-                Intent inten = new Intent(getApplicationContext(),Ostatuak.class);
-
-                Bundle miBundle = new Bundle();
-                miBundle.putStringArrayList("filtroLista",filtroLista);
-                miBundle.putBoolean("filtroTrue",filtrado);
-                inten.putExtras(miBundle);
-                startActivity(inten);
-            }
         });*/
+
+
+
     }
 
     private void jarriHerriak (String hartutakoProbintzia) {

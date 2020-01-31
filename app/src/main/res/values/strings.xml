@@ -27,5 +27,12 @@
     <string name="aCercaDeTexto">Bienvenid@ a la app de Ostatu-Agrad. Esta aplicación es para hacer tus reserbas de hoteles, campings o albergues. Gracias por usarla. Aceptamos mejoras. </string>
     <string name="aCercaDe">A cerca de</string>
 
+    <string name="filtrado">Filtrar alojamientos</string>
+
+    <string name="reservas">Ver mis reservas</string>
+
+    <string name="mapa">Vistazo al Mapa</string>
+
+
 
 </resources>

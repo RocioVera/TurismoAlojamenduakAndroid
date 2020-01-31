@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
     EditText name;
     EditText pass;
     private Double lat, log;
-
+    boolean registrado = false;
+    private View vista;
 
 
     @Override
@@ -53,16 +55,16 @@ public class MainActivity extends AppCompatActivity {
         registrarse = (Button) findViewById(R.id.bt_singup);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btMapa = (Button) findViewById(R.id.bt_mapa);
+        //btMapa = (Button) findViewById(R.id.bt_mapa);
 
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+  /*      if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
         } else {
             locationStart();
 
 
-        }
+        }*/
 
     }
 
@@ -122,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
     public void acceder(View v) {
         name =  (EditText) findViewById(R.id.ET_user);
         pass = (EditText) findViewById(R.id.ET_pass);
+        Context context = this;
+        vista = new View(context);
+
        /* Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
 
@@ -139,15 +144,31 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            int duration = Toast.LENGTH_SHORT;
-                            Context context = getApplicationContext();
-                            Toast toast = Toast.makeText(context, "Login completado", duration);
-                            toast.show();
+
                             JSONObject obj = new JSONObject(response);
+                            String error= obj.get("error").toString();
+                            if(error.equalsIgnoreCase("false")){
                             String nan = obj.get("NAN").toString();
                             String usuario = obj.get("ERABIL_IZENA").toString();
                             String telefono = obj.get("ERABIL_TELEFONO").toString();
                             String email = obj.get("ERABIL_EMAIL").toString();
+                            int duration = Toast.LENGTH_SHORT;
+                            Context context = getApplicationContext();
+                            Toast toast = Toast.makeText(context, "Login completado", duration);
+                            toast.show();
+                            registrado = true;
+                                if (registrado){
+                                    Intent intent2 = new Intent (vista.getContext(), Mainmenu.class);
+                                    startActivityForResult(intent2, 0);
+                                }
+
+                            }
+                            else{
+                                int duration2 = Toast.LENGTH_SHORT;
+                                Context context2 = getApplicationContext();
+                                Toast toast2 = Toast.makeText(context2, "Usuario o contraseña invalidos", duration2);
+                                toast2.show();
+                            }
 
 
                         } catch (JSONException e) {
@@ -184,9 +205,13 @@ public class MainActivity extends AppCompatActivity {
         };
         try {
             RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+
         }catch(Exception e){
 
         }
+        //Cambio de pantalla
+
+
     }
 
 

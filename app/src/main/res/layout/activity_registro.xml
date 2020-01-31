@@ -122,7 +122,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/butto_style3"
         android:hint="@string/volver"
-        android:onClick="registrarse"
+        android:onClick="volverAtras"
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
