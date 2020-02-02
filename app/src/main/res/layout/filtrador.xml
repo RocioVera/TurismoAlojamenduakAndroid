@@ -7,70 +7,18 @@
     android:background="@drawable/filtrar_foto"
     tools:context=".Filtrador">
 
-    <ImageButton
-        android:id="@+id/btnAmaieraDataCalendar"
-        android:layout_width="43dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
-        android:onClick="seleccionarFechaFinal"
-        app:layout_constraintStart_toEndOf="@+id/txtAmaieraData"
-        app:layout_constraintTop_toBottomOf="@+id/spn_pertsonaTot"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
-
-    <ImageButton
-        android:id="@+id/btnHasieraDataCalendar"
-        android:layout_width="43dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="28dp"
-        android:onClick="seleccionarFechaInicio"
-        app:layout_constraintStart_toEndOf="@+id/txtHasieraData"
-        app:layout_constraintTop_toBottomOf="@+id/spn_pertsonaTot"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
-
-    <EditText
-        android:id="@+id/txtAmaieraData"
-        android:layout_width="108dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="28dp"
-        android:background="@color/colorwhite"
-        android:editable="false"
-        android:ems="10"
-        android:hint="@string/amaieraData"
-        android:inputType="date"
-        app:layout_constraintStart_toEndOf="@+id/btnHasieraDataCalendar"
-        app:layout_constraintTop_toBottomOf="@+id/spn_pertsonaTot" />
-
-    <EditText
-        android:id="@+id/txtHasieraData"
-        android:layout_width="102dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="28dp"
-        android:background="@color/colorwhite"
-        android:editable="false"
-        android:ems="10"
-        android:hint="@string/hasieraData"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spn_pertsonaTot" />
-
     <Button
         android:id="@+id/bt_filtrar"
         android:layout_width="294dp"
         android:layout_height="61dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="44dp"
         android:background="@drawable/butto_style3"
-        android:onClick="filtrar"
+        android:onClick="aFiltrar"
         android:text="@string/string_filter"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtHasieraData" />
+        app:layout_constraintTop_toBottomOf="@+id/spn_pertsonaTot" />
 
     <Spinner
         android:id="@+id/spn_herria"
@@ -115,21 +63,6 @@
         android:background="@color/colorwhite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spn_herria" />
-
-    <TextView
-        android:id="@+id/txtVError"
-        android:layout_width="336dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:background="#FFFFFF"
-        android:text="@string/errorFiltrar"
-        android:textColor="#FF0028"
-        android:textSize="18sp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAmaieraData" />
 
     <TextView
         android:id="@+id/txtVFiltrar"

@@ -23,7 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"> <!-- así para quitarlo > android:theme="@style/Theme.AppCompat.Light.NoActionBar" -->
         android:usesCleartextTraffic="true">
-        <activity android:name=".Mainmenu"></activity>
+        <activity android:name=".reserva"></activity>
+        <activity android:name=".pintarListado" />
+        <activity android:name=".Mainmenu" />
         <activity android:name=".registro" />
         <activity android:name=".Ostatuak" />
         <activity android:name=".Filtrador" />
