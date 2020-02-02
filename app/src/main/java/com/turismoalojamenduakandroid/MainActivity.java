@@ -4,40 +4,31 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 //Se referencian las Clases necesarias para la conexión con el Servidor MySQL
 
@@ -114,6 +105,11 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent2, 0);
     }
 
+    public void acercaDe(View view){
+        Intent intent2 = new Intent (view.getContext(), ACercaDeActivity.class);
+        startActivityForResult(intent2, 0);
+    }
+
     public void hilosec(View v){
         new Thread(new Runnable() {
             public void run() {
@@ -160,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
                             int duration = Toast.LENGTH_SHORT;
                             Context context = getApplicationContext();
-                            Toast toast = Toast.makeText(context, "Login completado", duration);
+                            Toast toast = Toast.makeText(context, R.string.inicioSesionBueno, duration);
                             toast.show();
                                 registrado = true;
                                 if (registrado){
@@ -172,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                             else{
                                 int duration2 = Toast.LENGTH_SHORT;
                                 Context context2 = getApplicationContext();
-                                Toast toast2 = Toast.makeText(context2, "Usuario o contraseña invalidos", duration2);
+                                Toast toast2 = Toast.makeText(context2, R.string.errorInicioSesion, duration2);
                                 toast2.show();
                             }
 
@@ -222,6 +218,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void ventanaMapa(View view) {
+        Intent intent2 = new Intent (view.getContext(), mapa.class);
+        startActivityForResult(intent2, 0);
+    }
 
 
 

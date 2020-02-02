@@ -39,12 +39,11 @@ public class reserva extends AppCompatActivity {
     private Calendar c = Calendar.getInstance();
     private String CERO = "0", BARRA = "-";
     private int mes = c.get(Calendar.MONTH), dia = c.get(Calendar.DAY_OF_MONTH), ano = c.get(Calendar.YEAR);
+    private Bezeroa bez;
+    private Ostatu ostatu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reserva);
-
         txtDni = (TextView) findViewById(R.id.txtNan);
         txtPrezioTotala = (TextView) findViewById(R.id.txtPrezioa);
         txtIzena = (TextView) findViewById(R.id.txtOstatuIzena);
@@ -52,41 +51,54 @@ public class reserva extends AppCompatActivity {
         txtHelbidea = (TextView) findViewById(R.id.txtHelbidea);
         txtFechaInicio = (EditText) findViewById(R.id.txtDataHasiera);
         txtFechaSalida = (EditText) findViewById(R.id.txtDataAmaiera);
-        spnPertsonaTot=findViewById(R.id.spn_pertsonaTot);
+        spnPertsonaTot= (Spinner) findViewById(R.id.spn_pertsonaErreserba);
 
-        //Llenar pertsona totala
-        ArrayList<String> pertsonaTot = new ArrayList<String>();
-        for (int i = 1; i<=30;i++)
-            pertsonaTot.add(i + "");
-        ArrayAdapter<String> cmbAdapPertsonaTot = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, pertsonaTot);
-        spnPertsonaTot.setAdapter(cmbAdapPertsonaTot);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_reserva);
 
-        recibirDatos();
-        ponerDatos();
+        ostatu = (Ostatu) getIntent().getSerializableExtra("datos");
+        bez = (Bezeroa) getIntent().getSerializableExtra("bez");
 
+        nan=bez.getNAN();
+        txtDni.setText(nan);
 
-    }
+        double prez = (Math.random() * 300) + 1;
+        int pertsonaTot=3;
+        //int pertsonaTot=(int)spnPertsonaTot.getSelectedItem();
+        prezio =  prez * pertsonaTot;
+       txtPrezioTotala.setText(prezio.toString());
 
-    private void recibirDatos() {
-        Ostatu ostatu = (Ostatu) getIntent().getSerializableExtra("datos");
-        Bezeroa bez = (Bezeroa) getIntent().getSerializableExtra("bez");
-
-        nan = bez.getNAN();
-        prezio =  (Math.random()*300 + 100)*(int)spnPertsonaTot.getSelectedItem();
         nombre = ostatu.getOSTATU_IZENA();
+        txtIzena.setText(nombre);
+
         signatura = ostatu.getID_SIGNATURA();
+       txtSignatura.setText(signatura);
+
         direccion = ostatu.getOSTATU_HELBIDEA();
+      txtHelbidea.setText(direccion);
+
         dataSartu = "";
         dataIrten = "";
+    txtFechaInicio.setText(dataSartu);
+     txtFechaSalida.setText(dataIrten);
 
-    }
+        //Llenar pertsona totala
+        ArrayList<String> pertsonaTotArr = new ArrayList<String>();
+        for (int i = 1; i<=30;i++)
+            pertsonaTotArr.add(i + "");
+        ArrayAdapter<String> cmbAdapPertsonaTot = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, pertsonaTotArr);
+        cmbAdapPertsonaTot.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnPertsonaTot.setAdapter(cmbAdapPertsonaTot);
 
-    private void ponerDatos() {
-        txtDni.setText(signatura);
+
     }
 
     public void cambiarPrecio(View v){
-        prezio =  (Math.random()*300 + 100)*(int)spnPertsonaTot.getSelectedItem();
+        double prez = (Math.random() * 300) + 1;
+        int pertsonaTot=3;
+        //int pertsonaTot=(int)spnPertsonaTot.getSelectedItem();
+
+        prezio =  prez * pertsonaTot;
         txtPrezioTotala.setText(prezio+"");
     }
 
@@ -119,14 +131,6 @@ public class reserva extends AppCompatActivity {
         },ano, mes, dia);
         datePickerDialog.show();
     }
-
-
-
-
-
-
-
-
 
     public void reservar(View view){
     if (txtFechaSalida.getText().toString() != "" & txtFechaInicio.getText().toString() != "") {

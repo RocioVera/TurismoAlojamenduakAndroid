@@ -15,7 +15,7 @@ public class ACercaDeActivity extends AppCompatActivity {
     }
 
     public void volverAtras (View view) {
-        Intent pantallaListar = new Intent(ACercaDeActivity.this, Ostatuak.class);
+        Intent pantallaListar = new Intent(ACercaDeActivity.this, MainActivity.class);
         startActivity(pantallaListar);
         finish();
     }

@@ -1,44 +1,24 @@
 package com.turismoalojamenduakandroid;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,17 +39,11 @@ public class Filtrador<pueblos> extends AppCompatActivity{
     public static ArrayList <String> ostatus =  new ArrayList<>();
 
 
-    //
-
     public static String hartutakoProbintzia="";
     public static ArrayList<String> pueblos ;
-    private EditText fechaInicio, fechaFinal;
-    private TextView errorMessage;
 
     private Spinner spnProbintzia, spnMota, spnHerria, spnPertsonaTot;
-    private Calendar c = Calendar.getInstance();
-    private String CERO = "0", BARRA = "-";
-    private int mes = c.get(Calendar.MONTH), dia = c.get(Calendar.DAY_OF_MONTH), ano = c.get(Calendar.YEAR);
+
     private String[] strMota = new String[4];
     private String[] putamierda = new String[3];
     View vista;
@@ -79,7 +53,6 @@ public class Filtrador<pueblos> extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.filtrador);
-
 
         spnProbintzia=findViewById(R.id.spn_probintzia);
         spnMota=findViewById(R.id.spn_mota);
@@ -186,38 +159,6 @@ public class Filtrador<pueblos> extends AppCompatActivity{
 
     }
 
-    public void seleccionarFechaInicio(View view){
-        //fechaInicio=findViewById(R.id.txtHasieraData);
-        Calendar c= Calendar.getInstance();
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                int mesActual = month + 1;
-                String diaFormateado = (dayOfMonth < 10)? CERO + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
-                String mesFormateado = (mesActual < 10)? CERO + String.valueOf(mesActual):String.valueOf(mesActual);
-                fechaInicio.setText(year + BARRA + mesFormateado + BARRA + diaFormateado );
-            }
-        },ano, mes, dia);
-        datePickerDialog.show();
-    }
-
-    public void seleccionarFechaFinal(View view){
-        //fechaFinal=findViewById(R.id.txtAmaieraData);
-        Calendar c= Calendar.getInstance();
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                int mesActual = month + 1;
-                String diaFormateado = (dayOfMonth < 10)? CERO + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
-                String mesFormateado = (mesActual < 10)? CERO + String.valueOf(mesActual):String.valueOf(mesActual);
-                fechaFinal.setText(year + BARRA + mesFormateado + BARRA + diaFormateado );
-            }
-        },ano, mes, dia);
-        datePickerDialog.show();
-    }
-
     public void ostatuakPantalla () {
         Intent pantallaOstatuak = new Intent(Filtrador.this, Ostatuak.class);
         pantallaOstatuak.putExtra("bez", bez);
@@ -228,26 +169,6 @@ public class Filtrador<pueblos> extends AppCompatActivity{
     public void pintarPueblos(){
 
     }
-
-    public void filtrar(View view){
-
-        if (fechaFinal.getText() != null & fechaInicio.getText() != null ) {
-            //AQUI LLAMAR A LA API, FILTRADOS TRUE
-            //Supongo que habra que pasarle a la otra pantalla los datos o llamar desde ahi
-            //Para Asier
-            errorMessage.setVisibility(View.INVISIBLE);
-
-            ostatuakPantalla();
-
-        }else {
-            errorMessage.setVisibility(View.VISIBLE);
-
-        }
-
-
-
-    }
-
 
     public void aFiltrar(View v){
          Motass = (String) spnMota.getSelectedItem().toString();;
@@ -278,14 +199,18 @@ public class Filtrador<pueblos> extends AppCompatActivity{
                                 }
 
                                 Intent intent2 = new Intent (vista.getContext(), pintarListado.class);
-                                intent2.putExtra("listado", ostatus);
-                                intent2.putExtra("bez", bez);
-                                startActivityForResult(intent2, 0);
-
+                                    intent2.putExtra("listado", ostatus);
+                                    intent2.putExtra("bez", bez);
+                                    startActivityForResult(intent2, 0);
 
 
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                int duration2 = Toast.LENGTH_SHORT;
+                                Context context2 = getApplicationContext();
+                                Toast toast2 = Toast.makeText(context2, R.string.errorFiltrado, duration2);
+                                toast2.show();
+
+                               // e.printStackTrace();
                             }
                         }
                     },

@@ -110,12 +110,9 @@ public class pintarListado extends AppCompatActivity {
                             }
                             hostal = new Ostatu (ID_SIGNATURA,OSTATU_IZENA,DESKRIBAPENA,OSTATU_HELBIDEA,  MARKA,OSTATU_EMAIL,OSTATU_TELEFONOA,PERTSONA_TOT,  LATITUDE,  LONGITUDE,  MOTA,  WEB_URL,  ADISKIDETSU_URL,  ZIP_URL,  POSTA_KODEA,  HERRI_KODEA) ;
 
-
                             Intent intent2 = new Intent (vista.getContext(), reserva.class);
                             intent2.putExtra("datos", hostal);
                             intent2.putExtra("bez", bez);
-
-
                             startActivityForResult(intent2, 0);
 
 

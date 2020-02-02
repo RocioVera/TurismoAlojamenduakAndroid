@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">TurismoAlojamenduakAndroid</string>
+    <string name="errorInicioSesion">Usuario o contraseña invalidos</string>
+    <string name="inicioSesionBueno">Login completado</string>
     <string name="string_user">Usuario</string>
     <string name="string_pass">Contraseña</string>
     <string name="string_singIn">Iniciar sesion</string>
@@ -13,6 +15,9 @@
     <string name="errorFiltrar">Tienen que estar todos los campos rellenados</string>
     <string name="filtrar">Filtra</string>
 
+    <string name="errorFiltrado">No hay alojamientos con tu filtración</string>
+
+
     <string name="prezioa">Precio total</string>
     <string name="alojamiento">Alojamiento</string>
     <string name="nombreOstatua">Nombre</string>
@@ -22,6 +27,8 @@
     <string name="amaieraData2">Fecha salida</string>
     <string name="erreserbatu">Reservar</string>
     <string name="fecha">Fecha</string>
+    <string name="user_location_permission_explanation">Usuario</string>
+    <string name="user_location_permission_not_granted">Usuario</string>
 
 
     <string name="nombre">Nombre</string>
