@@ -5,9 +5,5 @@
         <domain includeSubdomains="true">insecure.example.com</domain>
         <domain includeSubdomains="true">insecure.cdn.example.com</domain>
     </domain-config>
-    <base-config cleartextTrafficPermitted="true">
-        <trust-anchors>
-            <certificates src="system" />
-        </trust-anchors>
-    </base-config>
+    <base-config cleartextTrafficPermitted="true" />
 </network-security-config>
