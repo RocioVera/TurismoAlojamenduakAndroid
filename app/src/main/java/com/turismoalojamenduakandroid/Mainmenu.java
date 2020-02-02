@@ -19,28 +19,27 @@ import java.net.URL;
 public class Mainmenu extends AppCompatActivity {
     private String[] strMota = new String[4];
     private String[] strProvincias = new String[3];
+    private Bezeroa bez;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        bez = (Bezeroa) getIntent().getSerializableExtra("bez");
+
         new MyTask().execute();
     }
-
-
-
 
 
     public void areservas(View view){
         Intent intent2 = new Intent (view.getContext(), Filtrador.class);
         intent2.putExtra("strMota", strMota);
         intent2.putExtra("strProvincias", strProvincias);
+        intent2.putExtra("bez", bez);
+
         startActivityForResult(intent2, 0);
     }
 
-
     private class MyTask extends AsyncTask<Void,Void,Void> {
-
-
         @Override
         protected Void doInBackground(Void... voids) {
             ateramotas();
@@ -49,9 +48,7 @@ public class Mainmenu extends AppCompatActivity {
         }
     }
 
-
     public String[] ateramotas() {
-
         String line=null;
         String result=null;
         BufferedInputStream is = null;

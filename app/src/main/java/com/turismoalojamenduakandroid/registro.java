@@ -1,11 +1,5 @@
 package com.turismoalojamenduakandroid;
 
-
-
-
-
-
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;

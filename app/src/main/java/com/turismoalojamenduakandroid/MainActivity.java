@@ -60,14 +60,6 @@ public class MainActivity extends AppCompatActivity {
         //btMapa = (Button) findViewById(R.id.bt_mapa);
 
 
-  /*      if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
-        } else {
-            locationStart();
-
-
-        }*/
-
     }
 
     private void locationStart() {
@@ -164,16 +156,18 @@ public class MainActivity extends AppCompatActivity {
                             String usuario = obj.get("ERABIL_IZENA").toString();
                             String telefono = obj.get("ERABIL_TELEFONO").toString();
                             String email = obj.get("ERABIL_EMAIL").toString();
+                            Bezeroa bez = new Bezeroa(nan, usuario,telefono,email);
+
                             int duration = Toast.LENGTH_SHORT;
                             Context context = getApplicationContext();
                             Toast toast = Toast.makeText(context, "Login completado", duration);
                             toast.show();
-                            registrado = true;
+                                registrado = true;
                                 if (registrado){
                                     Intent intent2 = new Intent (vista.getContext(), Mainmenu.class);
+                                    intent2.putExtra("bez", bez);
                                     startActivityForResult(intent2, 0);
                                 }
-
                             }
                             else{
                                 int duration2 = Toast.LENGTH_SHORT;

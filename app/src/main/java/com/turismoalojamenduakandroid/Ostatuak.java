@@ -23,6 +23,7 @@ public class Ostatuak extends AppCompatActivity {
     Ostatu Ostatu = new Ostatu();
     boolean filtrado;
     ArrayList<Ostatu> OstatuArrayLista = new ArrayList<Ostatu>();
+    private Bezeroa bez;
 
 
 
@@ -30,6 +31,7 @@ public class Ostatuak extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ostatu);
+        bez = (Bezeroa) getIntent().getSerializableExtra("bez");
 
         filtrado=false;
         Bundle miBundle=this.getIntent().getExtras();
@@ -131,6 +133,8 @@ public ArrayList<Ostatu> cargarLista(ArrayList<Ostatu> ostatuArrayLista, ArrayLi
        // int position = info.position;
        // String nombre = (String) lista1.getItemAtPosition(position);
         Intent pantallaFiltrar = new Intent(Ostatuak.this, Filtrador.class);
+        pantallaFiltrar.putExtra("bez", bez);
+
         startActivity(pantallaFiltrar);
     }
 

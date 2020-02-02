@@ -47,11 +47,14 @@ public class pintarListado extends AppCompatActivity {
     public static String HERRI_KODEA = "";
     View vista;
     Context context;
+    private Bezeroa bez;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pintar_listado);
+        bez = (Bezeroa) getIntent().getSerializableExtra("bez");
+
         lv1 = (ListView)findViewById(R.id.lv1);
         final ArrayList <String> ostatus =  (ArrayList <String>) getIntent().getSerializableExtra("listado");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ostatus);
@@ -110,6 +113,9 @@ public class pintarListado extends AppCompatActivity {
 
                             Intent intent2 = new Intent (vista.getContext(), reserva.class);
                             intent2.putExtra("datos", hostal);
+                            intent2.putExtra("bez", bez);
+
+
                             startActivityForResult(intent2, 0);
 
 

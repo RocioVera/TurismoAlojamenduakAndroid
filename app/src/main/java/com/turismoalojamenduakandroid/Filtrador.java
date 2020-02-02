@@ -74,6 +74,7 @@ public class Filtrador<pueblos> extends AppCompatActivity{
     private String[] putamierda = new String[3];
     View vista;
     Context context;
+    private Bezeroa bez;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +87,8 @@ public class Filtrador<pueblos> extends AppCompatActivity{
         spnPertsonaTot=findViewById(R.id.spn_pertsonaTot);
         strMota  = (String[]) getIntent().getSerializableExtra("strMota");
         putamierda = (String[]) getIntent().getSerializableExtra("strProvincias");
+        bez = (Bezeroa) getIntent().getSerializableExtra("bez");
+
         ArrayAdapter<String>  cmbAdapMota = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, strMota);
         spnMota.setAdapter(cmbAdapMota);
 
@@ -114,9 +117,6 @@ public class Filtrador<pueblos> extends AppCompatActivity{
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-
-
-
     }
 
     private void jarriHerriak () {
@@ -139,9 +139,7 @@ public class Filtrador<pueblos> extends AppCompatActivity{
                                 jo=ja.getJSONObject(i);
                                 String pueblo = jo.getString("HERRI_IZENA");
                                 pueblos.add(pueblo);
-
                             }
-
 
                             ArrayAdapter<String> cmbAdapHerriak = new ArrayAdapter<>(context,android.R.layout.simple_spinner_item, pueblos);
                             spnHerria.setAdapter(cmbAdapHerriak);
@@ -222,6 +220,8 @@ public class Filtrador<pueblos> extends AppCompatActivity{
 
     public void ostatuakPantalla () {
         Intent pantallaOstatuak = new Intent(Filtrador.this, Ostatuak.class);
+        pantallaOstatuak.putExtra("bez", bez);
+
         startActivity(pantallaOstatuak);
     }
 
@@ -279,6 +279,7 @@ public class Filtrador<pueblos> extends AppCompatActivity{
 
                                 Intent intent2 = new Intent (vista.getContext(), pintarListado.class);
                                 intent2.putExtra("listado", ostatus);
+                                intent2.putExtra("bez", bez);
                                 startActivityForResult(intent2, 0);
 
 

@@ -13,6 +13,16 @@
     <string name="errorFiltrar">Tienen que estar todos los campos rellenados</string>
     <string name="filtrar">Filtra</string>
 
+    <string name="prezioa">Precio total</string>
+    <string name="alojamiento">Alojamiento</string>
+    <string name="nombreOstatua">Nombre</string>
+    <string name="signatura">Signatura</string>
+    <string name="helbidea">Dirección </string>
+    <string name="hasieraData2">Fecha entrada</string>
+    <string name="amaieraData2">Fecha salida</string>
+    <string name="erreserbatu">Reservar</string>
+    <string name="fecha">Fecha</string>
+
 
     <string name="nombre">Nombre</string>
     <string name="contraseña">Contraseña</string>
