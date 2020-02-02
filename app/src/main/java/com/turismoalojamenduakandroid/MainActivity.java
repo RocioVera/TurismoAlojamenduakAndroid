@@ -4,11 +4,13 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -120,8 +122,18 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent2, 0);
     }
 
+    public void hilosec(View v){
+        new Thread(new Runnable() {
+            public void run() {
+                acceder();
 
-    public void acceder(View v) {
+            }
+        }).start();
+
+    }
+
+
+    public void acceder() {
         name =  (EditText) findViewById(R.id.ET_user);
         pass = (EditText) findViewById(R.id.ET_pass);
         Context context = this;
@@ -180,8 +192,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         int duration = Toast.LENGTH_SHORT;
+                        Throwable er = error.getCause();
                         Context context = getApplicationContext();
-                        Toast toast = Toast.makeText(context, "Error el usuario o contraseña no existen", duration);
+                        Toast toast = Toast.makeText(context,error.getMessage() , duration);
                         toast.show();
 
                         Toast.makeText(
@@ -213,6 +226,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
 
 
 
