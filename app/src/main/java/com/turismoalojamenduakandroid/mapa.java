@@ -34,22 +34,12 @@ public class mapa extends AppCompatActivity implements
     private LocationServices servicioUbicacion;
     private PermissionsManager permissionsManager;
     private MapboxMap mapboxMap;
-    private String longitudea = "", latitudea="", izena="", kokapena="", helbidea="";
+    private String longitudea = "10", latitudea="-2", izena="error", kokapena="error", helbidea="error";
     private Ostatu ostatu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        //credenciales
-        Mapbox.getInstance(this, "pk.eyJ1Ijoicm9jaW92ZXJhIiwiYSI6ImNrNXpuMWJrMTFncG4zZnJ2djlhaXZsb2gifQ.apgdEaJw2unPnclYPRR5Yw");
-        setContentView(R.layout.activity_mapa);
-        getSupportActionBar().hide();
-
-        mapaView = (MapView) findViewById(R.id.mapView);
-        mapaView.onCreate(savedInstanceState);
-        mapaView.getMapAsync(this);
 
         ostatu = (Ostatu) getIntent().getSerializableExtra("ostatu");
         longitudea = ostatu.getLONGITUDE()+"";
@@ -57,6 +47,15 @@ public class mapa extends AppCompatActivity implements
         izena = ostatu.getOSTATU_IZENA();
         kokapena = ostatu.getPOSTA_KODEA()+"";
         helbidea = ostatu.getOSTATU_HELBIDEA();
+
+        //credenciales
+        Mapbox.getInstance(this, "pk.eyJ1Ijoicm9jaW92ZXJhIiwiYSI6ImNrNXpuMWJrMTFncG4zZnJ2djlhaXZsb2gifQ.apgdEaJw2unPnclYPRR5Yw");
+        setContentView(R.layout.activity_mapa);
+      //  getSupportActionBar().hide();
+
+        mapaView = (MapView) findViewById(R.id.mapView);
+        mapaView.onCreate(savedInstanceState);
+        mapaView.getMapAsync(this);
 
         // mapbox camara
         mapaView.getMapAsync(new OnMapReadyCallback() {

@@ -45,7 +45,6 @@ public class sacarReservas extends AppCompatActivity {
         lv1 = (ListView)findViewById(R.id.lv1);
         sacarDatos();
 
-
         /*lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -54,13 +53,11 @@ public class sacarReservas extends AppCompatActivity {
 
             }
         });*/
-
     }
 
     public void verReservas(View view){
         Intent intent2 = new Intent (view.getContext(), Mainmenu.class);
         intent2.putExtra("bez", bez);
-
         startActivityForResult(intent2, 0);
     }
 
@@ -74,9 +71,7 @@ public class sacarReservas extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         try {
-
                             JSONArray ja=new JSONArray(response);
                             JSONObject jo=null;
 
@@ -86,21 +81,18 @@ public class sacarReservas extends AppCompatActivity {
                                 OSTATU_IZENA = jo.getString("OSTATU_IZENA");
                                 Fechaini = jo.getString("DATA_HASIERA");
                                 FechaFini = jo.getString("DATA_AMAIERA");
-                                String linea = OSTATU_IZENA + ": "+Fechaini+"," +FechaFini;
+                                String linea = OSTATU_IZENA + ": "+Fechaini+" - " +FechaFini;
                                 listadoReservas.add(linea);
-
                             }
 
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, listadoReservas);
                             lv1.setAdapter(adapter);
 
-
-
-
-
                         } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                            int duration = Toast.LENGTH_SHORT;
+                            Context context = getApplicationContext();
+                            Toast toast = Toast.makeText(context, R.string.errorSacarReservas, duration);
+                            toast.show();                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -108,7 +100,7 @@ public class sacarReservas extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         int duration = Toast.LENGTH_SHORT;
                         Context context = getApplicationContext();
-                        Toast toast = Toast.makeText(context, "Error en la selección de la provincia", duration);
+                        Toast toast = Toast.makeText(context, R.string.errorSacarProvincia, duration);
                         toast.show();
 
                         Toast.makeText(
@@ -121,28 +113,14 @@ public class sacarReservas extends AppCompatActivity {
         ){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-
                 Map<String, String> params = new HashMap<>();
                 params.put("NAN",bez.getNAN().toString());
-
-
-
                 return params;
             }
-
         };
         try {
             RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
-
         }catch(Exception e){
-
         }
-        //Cambio de pantalla
-
-
     }
-
-
-
-
 }

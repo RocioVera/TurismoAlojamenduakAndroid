@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -43,6 +44,7 @@ public class reserva extends AppCompatActivity {
     private Bezeroa bez;
     private Ostatu ostatu;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,24 +66,22 @@ public class reserva extends AppCompatActivity {
         txtDni.setText(nan.toString());
 
         double prez = (Math.random() * 300) + 1;
-        int pertsonaTot=3;
-        //int pertsonaTot=(int)spnPertsonaTot.getSelectedItem();
-        prezio =  prez * pertsonaTot;
-       txtPrezioTotala.setText(prezio.toString());
+        prezio =  prez * 2;
+        txtPrezioTotala.setText(prezio.toString());
 
         nombre = ostatu.getOSTATU_IZENA();
         txtIzena.setText(nombre);
 
         signatura = ostatu.getID_SIGNATURA();
-       txtSignatura.setText(signatura);
+        txtSignatura.setText(signatura);
 
         direccion = ostatu.getOSTATU_HELBIDEA();
-      txtHelbidea.setText(direccion);
+        txtHelbidea.setText(direccion);
 
         dataSartu = "";
         dataIrten = "";
-    txtFechaInicio.setText(dataSartu);
-     txtFechaSalida.setText(dataIrten);
+        txtFechaInicio.setText(dataSartu);
+        txtFechaSalida.setText(dataIrten);
 
         //Llenar pertsona totala
         ArrayList<String> pertsonaTotArr = new ArrayList<String>();
@@ -90,8 +90,15 @@ public class reserva extends AppCompatActivity {
         ArrayAdapter<String> cmbAdapPertsonaTot = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, pertsonaTotArr);
         cmbAdapPertsonaTot.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnPertsonaTot.setAdapter(cmbAdapPertsonaTot);
-
-
+        spnPertsonaTot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                cambiarPrecio(position);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
     }
 
     public void ventanaMapa(View view) {
@@ -100,10 +107,8 @@ public class reserva extends AppCompatActivity {
         startActivityForResult(intent2, 0);
     }
 
-    public void cambiarPrecio(View v){
+    public void cambiarPrecio(int pertsonaTot){
         double prez = (Math.random() * 300) + 1;
-        int pertsonaTot=3;
-        //int pertsonaTot=(int)spnPertsonaTot.getSelectedItem();
 
         prezio =  prez * pertsonaTot;
         txtPrezioTotala.setText(prezio+"");
@@ -140,7 +145,9 @@ public class reserva extends AppCompatActivity {
     }
 
     public void reservar(View view){
-    if (txtFechaSalida.getText().toString() != "" & txtFechaInicio.getText().toString() != "") {
+      //  txtFechaInicio = (EditText) findViewById(R.id.txtDataHasiera);
+//        txtFechaSalida = (EditText) findViewById(R.id.txtDataAmaiera);
+    if (txtFechaSalida.getText().length() != 0 & txtFechaInicio.getText().length() != 0 ) {
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 constants.reserva,
@@ -152,14 +159,16 @@ public class reserva extends AppCompatActivity {
                             JSONObject obj = new JSONObject(response);
                             insertado = obj.getString("error").toString();
 
+                            if(insertado.equalsIgnoreCase("false")){
+                                int duration = Toast.LENGTH_LONG;
+                                Context context = getApplicationContext();
+                                Toast toast = Toast.makeText(context, R.string.erreserbaEginda, duration);
+                                toast.show();
 
-
-                        if(insertado.equalsIgnoreCase("false")){
-                            //Se ha insertado la reserva
-                        }
-
-
-
+                                Intent intent1 = new Intent (context, Mainmenu.class);
+                                intent1.putExtra("bez", bez);
+                                startActivityForResult(intent1, 0);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -170,7 +179,7 @@ public class reserva extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         int duration = Toast.LENGTH_SHORT;
                         Context context = getApplicationContext();
-                        Toast toast = Toast.makeText(context, "Error en la selección de la provincia", duration);
+                        Toast toast = Toast.makeText(context, R.string.errorSacarProvincia, duration);
                         toast.show();
 
                         Toast.makeText(
@@ -193,7 +202,6 @@ public class reserva extends AppCompatActivity {
                 params.put("OSTATUAK_ID_SIGNATURA",signatura);
                 params.put("ERABILTZAILEAK_NAN",nan);
 
-
                 return params;
             }
 
@@ -202,9 +210,22 @@ public class reserva extends AppCompatActivity {
             RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
 
         }catch(Exception e){
-
+            int duration = Toast.LENGTH_SHORT;
+            Context context = getApplicationContext();
+            Toast toast = Toast.makeText(context, R.string.errorReservaServ, duration);
+            toast.show();
         }
         //Cambio de pantalla
+    } else {
+        int duration = Toast.LENGTH_SHORT;
+        Context context = getApplicationContext();
+        Toast toast = Toast.makeText(context, R.string.errorReserva, duration);
+        toast.show();
     }
+    }
+
+    public void cancelarReserva(View view){
+        Intent intent1 = new Intent (view.getContext(), sacarReservas.class);
+        startActivityForResult(intent1, 0);
     }
 }

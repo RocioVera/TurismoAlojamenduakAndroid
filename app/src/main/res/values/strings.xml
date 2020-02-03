@@ -16,6 +16,11 @@
     <string name="filtrar">Filtra</string>
 
     <string name="errorFiltrado">No hay alojamientos con tu filtración</string>
+    <string name="errorReserva">Rellena las dos fechas por favor</string>
+    <string name="errorSacarReservas">Aun no has hecho ninguna reserva</string>
+    <string name="errorReservaServ">Ha habido un problema con el servidor, disculpe las molestias</string>
+    <string name="errorSacarProvincia">Error en la selección de la provincia</string>
+    <string name="erreserbaEginda">Se ha hecho la reserva correctamente</string>
 
 
     <string name="prezioa">Precio total</string>

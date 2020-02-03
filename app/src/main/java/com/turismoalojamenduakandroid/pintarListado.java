@@ -48,7 +48,7 @@ public class pintarListado extends AppCompatActivity {
     View vista;
     Context context;
     private Bezeroa bez;
-
+   public static ArrayList <String> ostatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +56,7 @@ public class pintarListado extends AppCompatActivity {
         bez = (Bezeroa) getIntent().getSerializableExtra("bez");
 
         lv1 = (ListView)findViewById(R.id.lv1);
-        final ArrayList <String> ostatus =  (ArrayList <String>) getIntent().getSerializableExtra("listado");
+        ostatus =  (ArrayList <String>) getIntent().getSerializableExtra("listado");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ostatus);
         lv1.setAdapter(adapter);
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
