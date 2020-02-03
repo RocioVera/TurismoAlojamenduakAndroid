@@ -34,11 +34,14 @@ public class mapa extends AppCompatActivity implements
     private LocationServices servicioUbicacion;
     private PermissionsManager permissionsManager;
     private MapboxMap mapboxMap;
-    private String longitudea = "-2.52459977000000000000", latitudea="43.13758109000000000000", izena="BERRIOLOPE", kokapena="bilbao", helbidea="Barrio Berrio, 10. (BI-2632, PK 41)";
+    private String longitudea = "", latitudea="", izena="", kokapena="", helbidea="";
+    private Ostatu ostatu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         //credenciales
         Mapbox.getInstance(this, "pk.eyJ1Ijoicm9jaW92ZXJhIiwiYSI6ImNrNXpuMWJrMTFncG4zZnJ2djlhaXZsb2gifQ.apgdEaJw2unPnclYPRR5Yw");
         setContentView(R.layout.activity_mapa);
@@ -48,13 +51,12 @@ public class mapa extends AppCompatActivity implements
         mapaView.onCreate(savedInstanceState);
         mapaView.getMapAsync(this);
 
-        //Hartu datuak
-       /* Bundle bundle = getIntent().getExtras();
-        izena = (String) bundle.get("izen");
-        latitudea = (String) bundle.get("lati");
-        longitudea = (String) bundle.get("longi");
-        kokapena = (String) bundle.get("koka");
-        helbidea = (String) bundle.get("helbide");*/
+        ostatu = (Ostatu) getIntent().getSerializableExtra("ostatu");
+        longitudea = ostatu.getLONGITUDE()+"";
+        latitudea = ostatu.getLATITUDE()+"";
+        izena = ostatu.getOSTATU_IZENA();
+        kokapena = ostatu.getPOSTA_KODEA()+"";
+        helbidea = ostatu.getOSTATU_HELBIDEA();
 
         // mapbox camara
         mapaView.getMapAsync(new OnMapReadyCallback() {

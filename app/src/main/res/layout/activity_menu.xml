@@ -8,25 +8,14 @@
     tools:context=".Mainmenu">
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="215dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="90dp"
-        android:background="@drawable/butto_style3"
-        android:text="@string/mapa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
-
-    <Button
         android:id="@+id/button2"
         android:layout_width="215dp"
         android:layout_height="60dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginTop="152dp"
         android:background="@drawable/butto_style3"
+        android:onClick="verReservas"
         android:text="@string/reservas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />

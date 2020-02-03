@@ -218,11 +218,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void ventanaMapa(View view) {
-        Intent intent2 = new Intent (view.getContext(), mapa.class);
-        startActivityForResult(intent2, 0);
-    }
-
 
 
 

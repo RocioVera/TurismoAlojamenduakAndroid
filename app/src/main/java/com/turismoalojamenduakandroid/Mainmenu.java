@@ -29,6 +29,16 @@ public class Mainmenu extends AppCompatActivity {
         new MyTask().execute();
     }
 
+    public void verReservas(View view){
+        Intent intent1 = new Intent (view.getContext(), sacarReservas.class);
+        intent1.putExtra("bez", bez);
+
+        startActivityForResult(intent1, 0);
+    }
+
+
+
+
 
     public void areservas(View view){
         Intent intent2 = new Intent (view.getContext(), Filtrador.class);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -32,8 +33,8 @@ public class reserva extends AppCompatActivity {
     String dataSartu="",dataIrten="",signatura = "",nan ="", nombre ="", direccion ="";
     Double prezio=0.0;
     int pertsonato = 0;
-    private TextView txtDni,txtPrezioTotala,txtIzena,txtSignatura,txtHelbidea;
-    private EditText txtFechaInicio, txtFechaSalida, coste;
+    public static TextView txtDni,txtPrezioTotala,txtIzena,txtSignatura,txtHelbidea;
+    public static EditText txtFechaInicio, txtFechaSalida, coste;
 
     private Spinner spnPertsonaTot;
     private Calendar c = Calendar.getInstance();
@@ -44,6 +45,8 @@ public class reserva extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_reserva);
         txtDni = (TextView) findViewById(R.id.txtNan);
         txtPrezioTotala = (TextView) findViewById(R.id.txtPrezioa);
         txtIzena = (TextView) findViewById(R.id.txtOstatuIzena);
@@ -53,14 +56,12 @@ public class reserva extends AppCompatActivity {
         txtFechaSalida = (EditText) findViewById(R.id.txtDataAmaiera);
         spnPertsonaTot= (Spinner) findViewById(R.id.spn_pertsonaErreserba);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reserva);
 
         ostatu = (Ostatu) getIntent().getSerializableExtra("datos");
         bez = (Bezeroa) getIntent().getSerializableExtra("bez");
 
         nan=bez.getNAN();
-        txtDni.setText(nan);
+        txtDni.setText(nan.toString());
 
         double prez = (Math.random() * 300) + 1;
         int pertsonaTot=3;
@@ -91,6 +92,12 @@ public class reserva extends AppCompatActivity {
         spnPertsonaTot.setAdapter(cmbAdapPertsonaTot);
 
 
+    }
+
+    public void ventanaMapa(View view) {
+        Intent intent2 = new Intent (view.getContext(), mapa.class);
+        intent2.putExtra("ostatu", ostatu);
+        startActivityForResult(intent2, 0);
     }
 
     public void cambiarPrecio(View v){
@@ -142,17 +149,10 @@ public class reserva extends AppCompatActivity {
                     public void onResponse(String response) {
                         String insertado="";
                         try {
-
-                            JSONArray ja=new JSONArray(response);
-                            JSONObject jo=null;
-
-                            int contador =0;
-                            for(int i=0;i<ja.length();i++){
-                                jo=ja.getJSONObject(i);
-                                 insertado = jo.getString("Error");
+                            JSONObject obj = new JSONObject(response);
+                            insertado = obj.getString("error").toString();
 
 
-                            }
 
                         if(insertado.equalsIgnoreCase("false")){
                             //Se ha insertado la reserva
@@ -189,7 +189,7 @@ public class reserva extends AppCompatActivity {
                 params.put("DATA_AMAIERA",txtFechaSalida.getText().toString());
                 params.put("DATA_HASIERA",txtFechaInicio.getText().toString());
                 params.put("ERRESERBA_PREZIO_TOT", String.valueOf(prezio));
-                params.put("PERTSONA_KANT_ERRES", String.valueOf((int)spnPertsonaTot.getSelectedItem()));
+                params.put("PERTSONA_KANT_ERRES", String.valueOf(spnPertsonaTot.getSelectedItem()).toString());
                 params.put("OSTATUAK_ID_SIGNATURA",signatura);
                 params.put("ERABILTZAILEAK_NAN",nan);
 

@@ -94,15 +94,13 @@ public class Ostatuak extends AppCompatActivity {
                 ArrayList<Ostatu> pruebaArrayList = new ArrayList<>();
                 OstatuArrayLista = cargarLista(OstatuArrayLista,filtroLista,filtrado);
 
-                Intent inten = new Intent(getApplicationContext(),Ostatu_deskrp.class);
+
                 Bundle miBundle= new Bundle();
 
                 Ostatu ost = OstatuArrayLista.get(posicion);
 
 
-                miBundle.putSerializable("ostatu",ost);
-                inten.putExtras(miBundle);
-                startActivity(inten);
+
 
             }
         });

@@ -19,6 +19,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity android:name=".mapa" />
+        <activity android:name=".sacarReservas" />
         <activity android:name=".reserva" />
         <activity android:name=".pintarListado" />
         <activity android:name=".Mainmenu" />
@@ -32,7 +33,6 @@
         </activity>
         <activity android:name=".Ostatuak" />
         <activity android:name=".Filtrador" />
-        <activity android:name=".Ostatu_deskrp" />
         <activity android:name=".ACercaDeActivity" />
     </application>
 
