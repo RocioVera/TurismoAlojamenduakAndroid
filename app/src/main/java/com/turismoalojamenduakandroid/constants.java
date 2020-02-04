@@ -12,6 +12,5 @@ public class constants {
     public final static String mostrarReserva = "http://192.168.0.12/PHP/sacarReservas.php";
 
 
-
-
+    public static String ostatuGuztiak = "http://192.168.0.12/PHP/ostatuGuztiak.php";
 }

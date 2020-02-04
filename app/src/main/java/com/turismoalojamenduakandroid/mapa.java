@@ -25,6 +25,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class mapa extends AppCompatActivity implements
@@ -36,17 +37,21 @@ public class mapa extends AppCompatActivity implements
     private MapboxMap mapboxMap;
     private String longitudea = "10", latitudea="-2", izena="error", kokapena="error", helbidea="error";
     private Ostatu ostatu;
+    private ArrayList<Ostatu> ostatuArr = new ArrayList<Ostatu>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ostatuArr = (ArrayList<Ostatu>) getIntent().getSerializableExtra("ostatuArr");
+
+/*
         ostatu = (Ostatu) getIntent().getSerializableExtra("ostatu");
         longitudea = ostatu.getLONGITUDE()+"";
         latitudea = ostatu.getLATITUDE()+"";
         izena = ostatu.getOSTATU_IZENA();
         kokapena = ostatu.getPOSTA_KODEA()+"";
-        helbidea = ostatu.getOSTATU_HELBIDEA();
+        helbidea = ostatu.getOSTATU_HELBIDEA();*/
 
         //credenciales
         Mapbox.getInstance(this, "pk.eyJ1Ijoicm9jaW92ZXJhIiwiYSI6ImNrNXpuMWJrMTFncG4zZnJ2djlhaXZsb2gifQ.apgdEaJw2unPnclYPRR5Yw");
@@ -75,29 +80,31 @@ public class mapa extends AppCompatActivity implements
 
     // localizacion
     public void localizacion(View view){
-        final Double latitude, longitude;
-        latitude = Double.parseDouble(latitudea);
-        longitude = Double.parseDouble(longitudea);
+        for (int i = 0; i>ostatuArr.size()-1; i++) {
+            final Double latitude, longitude;
+            latitude = Double.parseDouble(ostatuArr.get(i).getLATITUDE()+"");
+            longitude = Double.parseDouble(ostatuArr.get(i).getLONGITUDE()+"");
 
-        // MAPBOX
-        mapaView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                mapboxMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(
-                                latitude, longitude)) // coordenadas del alojamiento  elegido
-                        .title(izena)// nombre del alojamiento elegido
-                        .snippet(kokapena + "\n" + helbidea));// descripcion del alojamiento elegido
+            // MAPBOX
+            mapaView.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(MapboxMap mapboxMap) {
+                    mapboxMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(
+                                    latitude, longitude)) // coordenadas del alojamiento  elegido
+                            .title(izena)// nombre del alojamiento elegido
+                            .snippet(kokapena + "\n" + helbidea));// descripcion del alojamiento elegido
 
-                CameraPosition position = new CameraPosition.Builder()
-                        .target(new LatLng(latitude, longitude)) // coordenadas del alojamiento elegido
-                        .zoom(15) // zoom
-                        .tilt(30) // Finclinación de la cámara
-                        .build();
-                mapboxMap.animateCamera(CameraUpdateFactory
-                        .newCameraPosition(position), 7000);
-            }
-        });
+                    CameraPosition position = new CameraPosition.Builder()
+                            .target(new LatLng(latitude, longitude)) // coordenadas del alojamiento elegido
+                            .zoom(15) // zoom
+                            .tilt(30) // Finclinación de la cámara
+                            .build();
+                    mapboxMap.animateCamera(CameraUpdateFactory
+                            .newCameraPosition(position), 7000);
+                }
+            });
+        }
     }
 
     //MAPBOX UTILS

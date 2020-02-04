@@ -18,6 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".mapaOstatubat"
+            android:label="@string/title_activity_mapa_ostatubat"
+            android:theme="@style/NoActionBar"></activity>
         <activity android:name=".mapa" />
         <activity android:name=".sacarReservas" />
         <activity android:name=".reserva" />

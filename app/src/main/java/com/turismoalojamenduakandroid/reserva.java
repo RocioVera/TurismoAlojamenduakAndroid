@@ -65,9 +65,7 @@ public class reserva extends AppCompatActivity {
         nan=bez.getNAN();
         txtDni.setText(nan.toString());
 
-        double prez = (Math.random() * 300) + 1;
-        prezio =  prez * 2;
-        txtPrezioTotala.setText(prezio.toString());
+        cambiarPrecio(2);
 
         nombre = ostatu.getOSTATU_IZENA();
         txtIzena.setText(nombre);
@@ -102,7 +100,8 @@ public class reserva extends AppCompatActivity {
     }
 
     public void ventanaMapa(View view) {
-        Intent intent2 = new Intent (view.getContext(), mapa.class);
+
+        Intent intent2 = new Intent (view.getContext(), mapaOstatubat.class);
         intent2.putExtra("ostatu", ostatu);
         startActivityForResult(intent2, 0);
     }
