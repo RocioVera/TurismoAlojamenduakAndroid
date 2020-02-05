@@ -37,7 +37,7 @@ public class sacarReservas extends AppCompatActivity {
     public static String OSTATU_IZENA ="";
     public static String Fechaini = "";
     public static String FechaFini = "";
-    public static ArrayList<String> listadoReservas =  new ArrayList<>();
+    public static ArrayList<String> listadoReservas;
     public static View vista;
     Context context;
     Bezeroa bez;
@@ -70,14 +70,15 @@ public class sacarReservas extends AppCompatActivity {
                         try {
                             JSONArray ja=new JSONArray(response);
                             JSONObject jo=null;
-
+                            listadoReservas =  new ArrayList<>();
+                            String linea = "";
                             int contador =0;
                             for(int i=0;i<ja.length();i++){
                                 jo=ja.getJSONObject(i);
                                 OSTATU_IZENA = jo.getString("OSTATU_IZENA");
                                 Fechaini = jo.getString("DATA_HASIERA");
                                 FechaFini = jo.getString("DATA_AMAIERA");
-                                String linea = OSTATU_IZENA + ": "+Fechaini+" - " +FechaFini;
+                                linea = OSTATU_IZENA + ": "+Fechaini+" - " +FechaFini;
                                 listadoReservas.add(linea);
                             }
 
@@ -110,13 +111,13 @@ public class sacarReservas extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                String nanEnk;
+                String nanEnk = "";
                 try {
                     nanEnk = encriptar(bez.getNAN().toString(), "encriptar");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                params.put("NAN",bez.getNAN().toString());
+                params.put("NAN",nanEnk);
                 return params;
             }
         };
