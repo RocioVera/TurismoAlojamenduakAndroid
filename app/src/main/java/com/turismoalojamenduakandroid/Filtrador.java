@@ -45,7 +45,7 @@ public class Filtrador<pueblos> extends AppCompatActivity{
     private Spinner spnProbintzia, spnMota, spnHerria, spnPertsonaTot;
 
     private String[] strMota = new String[4];
-    private String[] putamierda = new String[3];
+    private String[] strProbin2 = new String[3];
     View vista;
     Context context;
     private Bezeroa bez;
@@ -59,7 +59,7 @@ public class Filtrador<pueblos> extends AppCompatActivity{
         spnHerria=findViewById(R.id.spn_herria);
         spnPertsonaTot=findViewById(R.id.spn_pertsonaTot);
         strMota  = (String[]) getIntent().getSerializableExtra("strMota");
-        putamierda = (String[]) getIntent().getSerializableExtra("strProvincias");
+        strProbin2 = (String[]) getIntent().getSerializableExtra("strProvincias");
         bez = (Bezeroa) getIntent().getSerializableExtra("bez");
 
         ArrayAdapter<String>  cmbAdapMota = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, strMota);
@@ -76,7 +76,7 @@ public class Filtrador<pueblos> extends AppCompatActivity{
        // Llenar provincias
         //String[] strProvincias = new String[] {"Araba", "Bizkaia", "Gipuzkoa"};
 
-        ArrayAdapter<String> cmbAdapProbintziak = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, putamierda);
+        ArrayAdapter<String> cmbAdapProbintziak = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, strProbin2);
         spnProbintzia.setAdapter(cmbAdapProbintziak);
 
         spnProbintzia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

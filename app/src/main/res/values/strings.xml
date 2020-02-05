@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TurismoAlojamenduakAndroid</string>
+    <string name="app_name" translatable="false">TurismoAlojamenduakAndroid</string>
     <string name="errorInicioSesion">Usuario o contraseña invalidos</string>
     <string name="inicioSesionBueno">Login completado</string>
     <string name="string_user">Usuario</string>
@@ -9,7 +9,7 @@
     <string name="string_search">Buscar</string>
     <string name="string_filter">Filtrar</string>
     <string name="string_pertsonaTot">Nº Personas</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps" translatable="false">Map</string>
     <string name="hasieraData">Ida</string>
     <string name="amaieraData">Vuelta</string>
     <string name="errorFiltrar">Tienen que estar todos los campos rellenados</string>
@@ -41,7 +41,7 @@
     <string name="contraseña">Contraseña</string>
     <string name="apellido">Apellido</string>
     <string name="numero">Nº.Telefono</string>
-    <string name="email">Email</string>
+    <string name="email" translatable="false">Email</string>
     <string name="DNI">Dni</string>
     <string name="registrar">Registrate</string>
     <string name="volver">Volver</string>
@@ -55,7 +55,7 @@
     <string name="reservas">Ver mis reservas</string>
 
     <string name="mapa">Vistazo al Mapa</string>
-    <string name="title_activity_mapa_ostatubat">mapaOstatubat</string>
+    <string name="title_activity_mapa_ostatubat" translatable="false">mapaOstatubat</string>
 
 
 </resources>

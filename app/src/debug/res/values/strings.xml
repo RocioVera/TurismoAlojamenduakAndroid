@@ -1,14 +1,64 @@
 <resources>
-    <string name="app_name">TurismoAlojamenduakAndroid</string>
+    <string name="app_name" translatable="false">TurismoAlojamenduakAndroid</string>
+    <string name="errorInicioSesion">Usuario o contraseña invalidos</string>
+    <string name="inicioSesionBueno">Login completado</string>
     <string name="string_user">Usuario</string>
     <string name="string_pass">Contraseña</string>
-    <string name="string_singIn">Login</string>
+    <string name="string_singIn">Iniciar sesion</string>
     <string name="string_singUp">Registrarse</string>
     <string name="string_search">Buscar</string>
     <string name="string_filter">Filtrar</string>
+    <string name="string_pertsonaTot">Nº Personas</string>
+    <string name="title_activity_maps" translatable="false">Map</string>
+    <string name="hasieraData">Ida</string>
+    <string name="amaieraData">Vuelta</string>
+    <string name="errorFiltrar">Tienen que estar todos los campos rellenados</string>
+    <string name="filtrar">Filtra</string>
+
+    <string name="errorFiltrado">No hay alojamientos con tu filtración</string>
+    <string name="errorReserva">Rellena las dos fechas por favor</string>
+    <string name="errorSacarReservas">Aun no has hecho ninguna reserva</string>
+    <string name="errorReservaServ">Ha habido un problema con el servidor, disculpe las molestias</string>
+    <string name="errorSacarProvincia">Error en la selección de la provincia</string>
+    <string name="erreserbaEginda">Se ha hecho la reserva correctamente</string>
+
+    <string name="prezioa">Precio total</string>
+    <string name="alojamiento">Alojamiento</string>
+    <string name="nombreOstatua">Nombre</string>
+    <string name="signatura">Signatura</string>
+    <string name="helbidea">Dirección </string>
+    <string name="hasieraData2">Fecha entrada</string>
+    <string name="amaieraData2">Fecha salida</string>
+    <string name="erreserbatu">Reservar</string>
+    <string name="fecha">Fecha</string>
+    <string name="user_location_permission_explanation">Usuario</string>
+    <string name="user_location_permission_not_granted">Usuario</string>
+    <string name="atzera">Volver</string>
+
+
+    <string name="nombre">Nombre</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="apellido">Apellido</string>
+    <string name="numero">Nº.Telefono</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="DNI">Dni</string>
+    <string name="registrar">Registrate</string>
+    <string name="volver">Volver</string>
+    <string name="menu_message">¿Que quiere hacer?</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="aCercaDeTexto">Bienvenid@ a la app de Ostatu-Agrad. Esta aplicación es para hacer tus reserbas de hoteles, campings o albergues. Gracias por usarla. Aceptamos mejoras. </string>
+    <string name="aCercaDe">A cerca de</string>
+
+    <string name="filtrado">Filtrar alojamientos</string>
+
+    <string name="reservas">Ver mis reservas</string>
+
+    <string name="mapa">Vistazo al Mapa</string>
+    <string name="title_activity_mapa_ostatubat" translatable="false">mapaOstatubat</string>
+    <string name="string_post" translatable="false">Postal</string>
     <string name="string_reserva">Reserva</string>
-    <string name="string_mapa">Mapa</string>
-    <string name="string_post">Postal</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="registroCompletado">Registro completado</string>
+    <string name="registroError">Error en el registro,el usuario está registrado</string>
+
 
 </resources>

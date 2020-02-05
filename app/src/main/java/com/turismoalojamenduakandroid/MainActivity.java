@@ -9,12 +9,17 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Editable;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.android.volley.AuthFailureError;
@@ -32,6 +37,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 
 //Se referencian las Clases necesarias para la conexión con el Servidor MySQL
 
@@ -81,91 +97,117 @@ public class MainActivity extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.ET_pass);
         Context context = this;
         vista = new View(context);
+        try {
+                int baimena = 1;
+                // Crear nuevo objeto Json basado en el mapa
 
-        int baimena = 1;
-        // Crear nuevo objeto Json basado en el mapa
+                // Actualizar datos en el servidor
+                StringRequest stringRequest = new StringRequest(
+                        Request.Method.POST,
+                        constants.conexion,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject obj = new JSONObject(response);
+                                    String error = obj.get("error").toString();
+                                    if (error.equalsIgnoreCase("false")) {
+                                        String nan =  obj.get("NAN").toString();
+                                        String usuario = obj.get("ERABIL_IZENA").toString();
+                                        String telefono = obj.get("ERABIL_TELEFONO").toString();
+                                        String email = obj.get("ERABIL_EMAIL").toString();
 
-        // Actualizar datos en el servidor
-        StringRequest stringRequest = new StringRequest(
-                Request.Method.POST,
-                constants.conexion,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject obj = new JSONObject(response);
-                            String error = obj.get("error").toString();
-                            if (error.equalsIgnoreCase("false")) {
-                                String nan = obj.get("NAN").toString();
-                                String usuario = obj.get("ERABIL_IZENA").toString();
-                                String telefono = obj.get("ERABIL_TELEFONO").toString();
-                                String email = obj.get("ERABIL_EMAIL").toString();
-                                Bezeroa bez = new Bezeroa(nan, usuario, telefono, email);
+                                        try {
+                                            //nan = desencriptar(nan, "encriptar");
+                                            usuario = desencriptar(usuario, "encriptar");
+                                            telefono = desencriptar(telefono, "encriptar");
+                                            email = desencriptar(email, "encriptar");
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
 
-                                int duration = Toast.LENGTH_SHORT;
-                                Context context = getApplicationContext();
-                                Toast toast = Toast.makeText(context, R.string.inicioSesionBueno, duration);
-                                toast.show();
-                                registrado = true;
-                                if (registrado) {
-                                    Intent intent2 = new Intent(vista.getContext(), Mainmenu.class);
-                                    intent2.putExtra("bez", bez);
-                                    startActivityForResult(intent2, 0);
+                                        Bezeroa bez = new Bezeroa(name.getText().toString(), usuario, telefono, email);
+
+                                        int duration = Toast.LENGTH_SHORT;
+                                        Context context = getApplicationContext();
+                                        Toast toast = Toast.makeText(context, R.string.inicioSesionBueno, duration);
+                                        toast.show();
+                                        registrado = true;
+
+                                        if (registrado) {
+                                            Intent intent2 = new Intent(vista.getContext(), Mainmenu.class);
+                                            intent2.putExtra("bez", bez);
+                                            startActivityForResult(intent2, 0);
+                                        }
+
+                                    } else {
+                                        int duration2 = Toast.LENGTH_SHORT;
+                                        Context context2 = getApplicationContext();
+                                        Toast toast2 = Toast.makeText(context2, R.string.errorInicioSesion, duration2);
+                                        toast2.show();
+                                    }
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                            } else {
-                                int duration2 = Toast.LENGTH_SHORT;
-                                Context context2 = getApplicationContext();
-                                Toast toast2 = Toast.makeText(context2, R.string.errorInicioSesion, duration2);
-                                toast2.show();
                             }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                int duration = Toast.LENGTH_SHORT;
+                                Throwable er = error.getCause();
+                                Context context = getApplicationContext();
+                                Toast toast = Toast.makeText(context, error.getMessage(), duration);
+                                toast.show();
 
+                                Toast.makeText(
+                                        getApplicationContext(),
+                                        error.getMessage(),
+                                        Toast.LENGTH_LONG
+                                ).show();
+                            }
+                        }
+                ) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        int baimena = 1;
+                        Map<String, String> params = new HashMap<>();
+                        try {
 
-                        } catch (JSONException e) {
+                            params.put("NAN", encriptar(name.getText().toString(), "encriptar"));
+                            params.put("PASAHITZA", encriptar(pass.getText().toString(), "encriptar"));
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        return params;
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        int duration = Toast.LENGTH_SHORT;
-                        Throwable er = error.getCause();
-                        Context context = getApplicationContext();
-                        Toast toast = Toast.makeText(context, error.getMessage(), duration);
-                        toast.show();
 
-                        Toast.makeText(
-                                getApplicationContext(),
-                                error.getMessage(),
-                                Toast.LENGTH_LONG
-                        ).show();
-                    }
+                };
+                try {
+                    RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+
+                } catch (Exception e) {
+
                 }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                int baimena = 1;
-                Map<String, String> params = new HashMap<>();
-                params.put("NAN", name.getText().toString());
-                params.put("PASAHITZA", pass.getText().toString());
+                //Cambio de pantalla
 
-                return params;
-            }
-
-        };
-        try {
-            RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
-        //Cambio de pantalla
 
 
     }
 
 
     public void ventanaMapa(View view) {
+        int duration = Toast.LENGTH_SHORT;
+
+        Context context2 = getApplicationContext();
+        Toast toast2 = Toast.makeText(context2, R.string.errorInicioSesion, duration);
+        toast2.show();
 
         final Context context = this;
         vista = new View(context);
@@ -180,39 +222,26 @@ public class MainActivity extends AppCompatActivity {
                             JSONArray ja=new JSONArray(response);
                             JSONObject jo=null;
 
-                            for (int i = 0; i < ja.length(); i++) {
+                            Ostatu[] aj = new Ostatu[10];
+                            for (int i = 0; i < aj.length-1; i++) {
                                 jo = ja.getJSONObject(i);
-                                String ID_SIGNATURA, OSTATU_IZENA, DESKRIBAPENA, OSTATU_HELBIDEA, MARKA, OSTATU_EMAIL,
-                                        OSTATU_TELEFONOA, MOTA, WEB_URL, ADISKIDETSU_URL, ZIP_URL, HERRI_KODEA;
-                                int PERTSONA_TOT, POSTA_KODEA;
+                                String OSTATU_IZENA, OSTATU_HELBIDEA;
+                                int POSTA_KODEA;
                                 double LATITUDE, LONGITUDE;
 
-                                //  String OSTATU_IZENA, String DESKRIBAPENA, String OSTATU_HELBIDEA, String MARKA, String OSTATU_EMAIL, String OSTATU_TELEFONOA, int PERTSONA_TOT, double LATITUDE, double LONGITUDE, String MOTA, String WEB_URL, String ADISKIDETSU_URL, String ZIP_URL, int POSTA_KODEA, String HERRI_KODEA) {
-                                ID_SIGNATURA = jo.getString("ID_SIGNATURA");
                                 OSTATU_IZENA = jo.getString("OSTATU_IZENA");
-                                DESKRIBAPENA = jo.getString("DESKRIBAPENA");
                                 OSTATU_HELBIDEA = jo.getString("OSTATU_HELBIDEA");
-                                MARKA = jo.getString("MARKA");
-                                OSTATU_EMAIL = jo.getString("OSTATU_EMAIL");
-                                OSTATU_TELEFONOA = jo.getString("OSTATU_TELEFONOA");
-                                PERTSONA_TOT = Integer.parseInt(jo.getString("PERTSONA_TOT"));
                                 LATITUDE = Double.parseDouble(jo.getString("LATITUDE"));
                                 LONGITUDE = Double.parseDouble(jo.getString("LONGITUDE"));
-                                MOTA = jo.getString("MOTA");
-                                WEB_URL = jo.getString("WEB_URL");
-                                ADISKIDETSU_URL = jo.getString("ADISKIDETSU_URL");
-                                ZIP_URL = jo.getString("ZIP_URL");
                                 POSTA_KODEA = Integer.parseInt(jo.getString("POSTA_KODEA"));
-                                HERRI_KODEA = jo.getString("HERRI_KODEA");
 
-                                Ostatu osta = new Ostatu(ID_SIGNATURA, OSTATU_IZENA, DESKRIBAPENA, OSTATU_HELBIDEA, MARKA, OSTATU_EMAIL, OSTATU_TELEFONOA, PERTSONA_TOT, LATITUDE, LONGITUDE, MOTA, WEB_URL, ADISKIDETSU_URL, ZIP_URL, POSTA_KODEA, HERRI_KODEA);
-
-                                ostatuArr.add(osta);
+                                Ostatu osta = new Ostatu(OSTATU_IZENA, OSTATU_HELBIDEA, LATITUDE, LONGITUDE, POSTA_KODEA);
+                                aj[i] = osta;
 
                             }
 
                             Intent intent2 = new Intent(context, mapa.class);
-                            intent2.putExtra("ostatuArr", ostatuArr);
+                            intent2.putExtra("ostatuArr", aj);
                             startActivityForResult(intent2, 0);
 
                         } catch (JSONException e) {
@@ -258,43 +287,33 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-/*
- for (int i = 0; i < ja.length(); i++) {
-                                jo = ja.getJSONObject(i);
-                                String ID_SIGNATURA, OSTATU_IZENA, DESKRIBAPENA, OSTATU_HELBIDEA, MARKA, OSTATU_EMAIL,
-                                        OSTATU_TELEFONOA, MOTA, WEB_URL, ADISKIDETSU_URL, ZIP_URL, HERRI_KODEA;
-                                int PERTSONA_TOT, POSTA_KODEA;
-                                double LATITUDE, LONGITUDE;
+    private String desencriptar(String datos, String password) throws Exception{
+        SecretKeySpec secretKey = generateKey(password);
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE, secretKey);
+        byte[] datosDescoficados = android.util.Base64.decode(datos, android.util.Base64.DEFAULT);
+        byte[] datosDesencriptadosByte = cipher.doFinal(datosDescoficados);
+        String datosDesencriptadosString = new String(datosDesencriptadosByte);
+        return datosDesencriptadosString;
+    }
 
-                                //  String OSTATU_IZENA, String DESKRIBAPENA, String OSTATU_HELBIDEA, String MARKA, String OSTATU_EMAIL, String OSTATU_TELEFONOA, int PERTSONA_TOT, double LATITUDE, double LONGITUDE, String MOTA, String WEB_URL, String ADISKIDETSU_URL, String ZIP_URL, int POSTA_KODEA, String HERRI_KODEA) {
-                                ID_SIGNATURA = jo.getString("ID_SIGNATURA");
-                                OSTATU_IZENA = jo.getString("OSTATU_IZENA");
-                                DESKRIBAPENA = jo.getString("DESKRIBAPENA");
-                                OSTATU_HELBIDEA = jo.getString("OSTATU_HELBIDEA");
-                                MARKA = jo.getString("MARKA");
-                                OSTATU_EMAIL = jo.getString("OSTATU_EMAIL");
-                                OSTATU_TELEFONOA = jo.getString("OSTATU_TELEFONOA");
-                                PERTSONA_TOT = Integer.parseInt(jo.getString("PERTSONA_TOT"));
-                                LATITUDE = Double.parseDouble(jo.getString("LATITUDE"));
-                                LONGITUDE = Double.parseDouble(jo.getString("LONGITUDE"));
-                                MOTA = jo.getString("MOTA");
-                                WEB_URL = jo.getString("WEB_URL");
-                                ADISKIDETSU_URL = jo.getString("ADISKIDETSU_URL");
-                                ZIP_URL = jo.getString("ZIP_URL");
-                                POSTA_KODEA = Integer.parseInt(jo.getString("POSTA_KODEA"));
-                                HERRI_KODEA = jo.getString("HERRI_KODEA");
+    private String encriptar(String datos, String password) throws Exception{
+        SecretKeySpec secretKey = generateKey(password);
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        byte[] datosEncriptadosBytes = cipher.doFinal(datos.getBytes());
+        String datosEncriptadosString = android.util.Base64.encodeToString(datosEncriptadosBytes, Base64.DEFAULT);
+        datosEncriptadosString = datosEncriptadosString.substring(0,datosEncriptadosString.length()-2);
+        return datosEncriptadosString;
+    }
 
-                                Ostatu osta = new Ostatu(ID_SIGNATURA, OSTATU_IZENA, DESKRIBAPENA, OSTATU_HELBIDEA, MARKA, OSTATU_EMAIL, OSTATU_TELEFONOA, PERTSONA_TOT, LATITUDE, LONGITUDE, MOTA, WEB_URL, ADISKIDETSU_URL, ZIP_URL, POSTA_KODEA, HERRI_KODEA);
-
-                                ostatuArr.add(osta);
-
-                            }
-
-                            Intent intent2 = new Intent(context, mapa.class);
-                            intent2.putExtra("ostatuArr", ostatuArr);
-                            startActivityForResult(intent2, 0);
-
- */
+    private SecretKeySpec generateKey(String password) throws Exception{
+        MessageDigest sha = MessageDigest.getInstance("SHA-256");
+        byte[] key = password.getBytes("UTF-8");
+        key = sha.digest(key);
+        SecretKeySpec secretKey = new SecretKeySpec(key, "AES");
+        return secretKey;
+    }
 
 
 }

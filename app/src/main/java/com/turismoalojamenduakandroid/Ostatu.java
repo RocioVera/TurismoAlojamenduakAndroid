@@ -48,6 +48,14 @@ public class Ostatu implements Serializable {
         this.HERRI_KODEA = HERRI_KODEA;
     }
 
+    public Ostatu(String OSTATU_IZENA, String OSTATU_HELBIDEA, double LATITUDE, double LONGITUDE, int POSTA_KODEA) {
+        this.OSTATU_IZENA = OSTATU_IZENA;
+        this.OSTATU_HELBIDEA = OSTATU_HELBIDEA;
+        this.LATITUDE = LATITUDE;
+        this.LONGITUDE = LONGITUDE;
+        this.POSTA_KODEA = POSTA_KODEA;
+    }
+
     public Ostatu() {
     }
 

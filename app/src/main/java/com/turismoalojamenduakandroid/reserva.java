@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,10 +26,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 public class reserva extends AppCompatActivity {
     String dataSartu="",dataIrten="",signatura = "",nan ="", nombre ="", direccion ="";
@@ -65,8 +70,6 @@ public class reserva extends AppCompatActivity {
         nan=bez.getNAN();
         txtDni.setText(nan.toString());
 
-        cambiarPrecio(2);
-
         nombre = ostatu.getOSTATU_IZENA();
         txtIzena.setText(nombre);
 
@@ -97,6 +100,8 @@ public class reserva extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+        cambiarPrecio(2);
+
     }
 
     public void ventanaMapa(View view) {
@@ -193,13 +198,18 @@ public class reserva extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 int baimena = 1;
                 Map<String, String> params = new HashMap<>();
-
+                String nanEncr="";
+                try {
+                    nanEncr = encriptar(nan, "encriptar");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 params.put("DATA_AMAIERA",txtFechaSalida.getText().toString());
                 params.put("DATA_HASIERA",txtFechaInicio.getText().toString());
                 params.put("ERRESERBA_PREZIO_TOT", String.valueOf(prezio));
                 params.put("PERTSONA_KANT_ERRES", String.valueOf(spnPertsonaTot.getSelectedItem()).toString());
                 params.put("OSTATUAK_ID_SIGNATURA",signatura);
-                params.put("ERABILTZAILEAK_NAN",nan);
+                params.put("ERABILTZAILEAK_NAN",nanEncr);
 
                 return params;
             }
@@ -227,4 +237,33 @@ public class reserva extends AppCompatActivity {
         Intent intent1 = new Intent (view.getContext(), sacarReservas.class);
         startActivityForResult(intent1, 0);
     }
+
+    private String desencriptar(String datos, String password) throws Exception{
+        SecretKeySpec secretKey = generateKey(password);
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE, secretKey);
+        byte[] datosDescoficados = android.util.Base64.decode(datos, android.util.Base64.DEFAULT);
+        byte[] datosDesencriptadosByte = cipher.doFinal(datosDescoficados);
+        String datosDesencriptadosString = new String(datosDesencriptadosByte);
+        return datosDesencriptadosString;
+    }
+
+    private String encriptar(String datos, String password) throws Exception{
+        SecretKeySpec secretKey = generateKey(password);
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        byte[] datosEncriptadosBytes = cipher.doFinal(datos.getBytes());
+        String datosEncriptadosString = android.util.Base64.encodeToString(datosEncriptadosBytes, Base64.DEFAULT);
+        datosEncriptadosString = datosEncriptadosString.substring(0,datosEncriptadosString.length()-2);
+        return datosEncriptadosString;
+    }
+
+    private SecretKeySpec generateKey(String password) throws Exception{
+        MessageDigest sha = MessageDigest.getInstance("SHA-256");
+        byte[] key = password.getBytes("UTF-8");
+        key = sha.digest(key);
+        SecretKeySpec secretKey = new SecretKeySpec(key, "AES");
+        return secretKey;
+    }
+
 }

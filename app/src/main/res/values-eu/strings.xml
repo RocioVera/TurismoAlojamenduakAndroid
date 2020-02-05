@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="string_reserva">Erreserba</string>
+    <string name="DNI">NAN</string>
+    <string name="aCercaDe">Informazioa</string>
+    <string name="aCercaDeTexto">Ongi etorri Ostatu-Agrad aplikaziora. Aplikazio hau hotel, kanpin edo aterpetxeetarako zure erreserbak egitea da. Eskerrik asko erabiltzeagatik. Hobekuntzak onartzen ditugu.</string>
+    <string name="alojamiento">Ostatuak</string>
+    <string name="amaieraData">Buelta</string>
+    <string name="amaieraData2">Irteera data</string>
+    <string name="apellido">Abizenak</string>
+    <string name="atzera">Itzuli</string>
+    <string name="cancelar">Ezeztatu</string>
+    <string name="contraseña">Pasahitza</string>
+    <string name="erreserbaEginda">Erreserba ondo egin da</string>
+    <string name="erreserbatu">Erreserba</string>
+    <string name="errorFiltrado">Zure filtrazioarekin ez daude ostaturik</string>
+    <string name="errorInicioSesion">Bezeroa edo pasahitza txarto</string>
+    <string name="errorFiltrar">Eremu guztiak bete behar dira</string>
+    <string name="errorReserva">Gehitu bi datak mesedez</string>
+    <string name="errorReservaServ">Zerbitzariarekin errorea, barkatu eragozpenak</string>
+    <string name="errorSacarProvincia">Probintzia txarto.</string>
+    <string name="errorSacarReservas">Ez dituzu erreserbarik</string>
+    <string name="fecha">Data</string>
+    <string name="filtrado">Filtratu ostatuak</string>
+    <string name="filtrar">Filtratu</string>
+    <string name="hasieraData">Joan</string>
+    <string name="hasieraData2">Sarrera data</string>
+    <string name="helbidea">Helbidea</string>
+    <string name="inicioSesionBueno">Login-a eginda</string>
+    <string name="mapa">Begiratu mapa</string>
+    <string name="menu_message">Zer egin nahi duzu?</string>
+    <string name="nombre">Izena</string>
+    <string name="nombreOstatua">Izena</string>
+    <string name="numero">Telefono zbk</string>
+    <string name="prezioa">Prezio totala</string>
+    <string name="registrar">Erregistratu</string>
+    <string name="reservas">Begiratu nire erreserbak</string>
+    <string name="signatura">Signatura</string>
+    <string name="string_filter">Filtratu</string>
+    <string name="string_pass">Pasahitza</string>
+    <string name="string_pertsonaTot">Pertsona zbk</string>
+    <string name="string_search">Bilatu</string>
+    <string name="string_singIn">Hasi saioa</string>
+    <string name="string_singUp">Erregistratu</string>
+    <string name="string_user">Bezeroa</string>
+    <string name="user_location_permission_explanation">Bezeroa</string>
+    <string name="user_location_permission_not_granted">Bezeroa</string>
+    <string name="volver">Itzuli</string>
+    <string name="registroCompletado">Erregistratu zaude</string>
+    <string name="registroError">Txarto erregistratuta</string>
+
+</resources>
