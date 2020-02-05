@@ -37,21 +37,21 @@ public class mapa extends AppCompatActivity implements
     private MapboxMap mapboxMap;
     private String longitudea = "10", latitudea="-2", izena="error", kokapena="error", helbidea="error";
     private Ostatu ostatu;
-    private ArrayList<Ostatu> ostatuArr = new ArrayList<Ostatu>();
-
+    public static  ArrayList<Ostatu> ostatuArr = new ArrayList<Ostatu>();
+    public static Ostatu[] aj = new Ostatu[5];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ostatuArr = (ArrayList<Ostatu>) getIntent().getSerializableExtra("ostatuArr");
+        aj = (Ostatu[]) getIntent().getSerializableExtra("ostatuArr");
 
-/*
+
         ostatu = (Ostatu) getIntent().getSerializableExtra("ostatu");
         longitudea = ostatu.getLONGITUDE()+"";
         latitudea = ostatu.getLATITUDE()+"";
         izena = ostatu.getOSTATU_IZENA();
         kokapena = ostatu.getPOSTA_KODEA()+"";
-        helbidea = ostatu.getOSTATU_HELBIDEA();*/
+        helbidea = ostatu.getOSTATU_HELBIDEA();
 
         //credenciales
         Mapbox.getInstance(this, "pk.eyJ1Ijoicm9jaW92ZXJhIiwiYSI6ImNrNXpuMWJrMTFncG4zZnJ2djlhaXZsb2gifQ.apgdEaJw2unPnclYPRR5Yw");
@@ -80,10 +80,14 @@ public class mapa extends AppCompatActivity implements
 
     // localizacion
     public void localizacion(View view){
-        for (int i = 0; i>ostatuArr.size()-1; i++) {
+        for (int i = 0; i>aj.length-1; i++) {
             final Double latitude, longitude;
-            latitude = Double.parseDouble(ostatuArr.get(i).getLATITUDE()+"");
-            longitude = Double.parseDouble(ostatuArr.get(i).getLONGITUDE()+"");
+            Ostatu kk = aj[i];
+            latitude = Double.parseDouble(kk.getLATITUDE()+"");
+            longitude = Double.parseDouble(kk.getLONGITUDE()+"");
+            izena = kk.getOSTATU_IZENA();
+            kokapena = kk.getPOSTA_KODEA()+"";
+            helbidea = kk.getOSTATU_HELBIDEA();
 
             // MAPBOX
             mapaView.getMapAsync(new OnMapReadyCallback() {

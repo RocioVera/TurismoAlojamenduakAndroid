@@ -179,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             JSONArray ja=new JSONArray(response);
                             JSONObject jo=null;
-
-                            for (int i = 0; i < ja.length(); i++) {
+                            Ostatu[] aj = new Ostatu[5];
+                            for (int i = 0; i < 5; i++) {
                                 jo = ja.getJSONObject(i);
                                 String ID_SIGNATURA, OSTATU_IZENA, DESKRIBAPENA, OSTATU_HELBIDEA, MARKA, OSTATU_EMAIL,
                                         OSTATU_TELEFONOA, MOTA, WEB_URL, ADISKIDETSU_URL, ZIP_URL, HERRI_KODEA;
@@ -205,14 +205,14 @@ public class MainActivity extends AppCompatActivity {
                                 POSTA_KODEA = Integer.parseInt(jo.getString("POSTA_KODEA"));
                                 HERRI_KODEA = jo.getString("HERRI_KODEA");
 
-                                Ostatu osta = new Ostatu(ID_SIGNATURA, OSTATU_IZENA, DESKRIBAPENA, OSTATU_HELBIDEA, MARKA, OSTATU_EMAIL, OSTATU_TELEFONOA, PERTSONA_TOT, LATITUDE, LONGITUDE, MOTA, WEB_URL, ADISKIDETSU_URL, ZIP_URL, POSTA_KODEA, HERRI_KODEA);
-
-                                ostatuArr.add(osta);
+                                Ostatu osta = new Ostatu("", OSTATU_IZENA, "", OSTATU_HELBIDEA, "", "", "", 0, LATITUDE, LONGITUDE, "", "", "", "", POSTA_KODEA, "");
+                                aj[i] = osta;
+                                //ostatuArr.add(osta);
 
                             }
 
                             Intent intent2 = new Intent(context, mapa.class);
-                            intent2.putExtra("ostatuArr", ostatuArr);
+                            intent2.putExtra("ostatuArr", aj);
                             startActivityForResult(intent2, 0);
 
                         } catch (JSONException e) {
