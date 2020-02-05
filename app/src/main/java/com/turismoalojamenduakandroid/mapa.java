@@ -47,13 +47,11 @@ public class mapa extends AppCompatActivity implements
         aj = (Ostatu[]) getIntent().getSerializableExtra("ostatuArr");
 
 
-/*
         ostatu = (Ostatu) getIntent().getSerializableExtra("ostatu");
         longitudea = ostatu.getLONGITUDE()+"";
         latitudea = ostatu.getLATITUDE()+"";
         izena = ostatu.getOSTATU_IZENA();
         kokapena = ostatu.getPOSTA_KODEA()+"";
-        helbidea = ostatu.getOSTATU_HELBIDEA();*/
         helbidea = ostatu.getOSTATU_HELBIDEA();
 
         //credenciales
